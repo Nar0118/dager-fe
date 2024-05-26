@@ -1,20 +1,27 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Link, Routes} from 'react-router-dom';
-import Home from './pages/Home';
-import Catalogue from './pages/Catalogue';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import AdminPage from "./pages/AdminPage";
+import Home from "./pages/Home";
+import CarPage from "./pages/CarPage";
+import LoginPage from "./pages/Login";
+import NotFound from "./pages/404";
+import { Navbar } from "./components/Navbar";
+import CarDetails from "./pages/CarDetails";
 
-function AppRouter() {
+function App() {
   return (
     <Router>
-      <Link to='/home'>Home</Link>
-      <Link to='/products'>About</Link>
-
+      <Navbar />
       <Routes>
-        <Route path='/home' element={<Home/>} />
-        <Route path='/products' element={<Catalogue/>} />
+        <Route path="/" element={<Home />} />
+        <Route path="/catalogue" element={<CarPage />} />
+        <Route path="/catalogue/:carId" element={<CarDetails />} /> 
+        <Route path="/admin" element={<AdminPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );
 }
 
-export default AppRouter;
+export default App;

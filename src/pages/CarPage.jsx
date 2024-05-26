@@ -1,10 +1,10 @@
 import React from 'react';
-import CarDetails from '../components/CarDetails'
+import { CarList } from '../components/CarList';
 
 const CarPage = ({ match }) => {
   return (
     <div>
-      <CarDetails match={match} />
+      <CarList />
     </div>
   );
 };

@@ -1,28 +1,31 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
-const CarList = () => {
+export const CarList = () => {
   const [cars, setCars] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/cars')
-      .then(response => {
-        setCars(response.data);
-      })
-      .catch(error => {
-        console.error('There was an error fetching the cars!', error);
-      });
+    const fetchCars = async () => {
+      try {
+        const { data } = await axios.get("http://localhost:5000/api");
+        setCars(data.data);
+      } catch (e) {
+        console.error(e);
+      }   
+    };
+
+    fetchCars();
   }, []);
 
   return (
     <div>
       <h2>Car Catalogue</h2>
       <ul>
-        {cars.map(car => (
+        {cars.map((car) => (
           <li key={car._id}>
-            <Link to={`/cars/${car._id}`}>
-              {car.make} {car.model} ({car.year})
+            <Link to={`/catalogue/${car._id}`}>
+              {car.name} {car.model} ({car.year})
             </Link>
           </li>
         ))}
@@ -30,5 +33,3 @@ const CarList = () => {
     </div>
   );
 };
-
-export default CarList;
