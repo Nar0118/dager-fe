@@ -19,8 +19,12 @@ export default function AdminPage() {
   }, [navigate]);
 
   return (
-    <>
+    <div
+      style={{
+        padding: "0 20px",
+      }}
+    >
       <AdminTabs />
-    </>
+    </div>
   );
 }

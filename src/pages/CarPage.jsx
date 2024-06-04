@@ -1,7 +1,7 @@
 import React from 'react';
 import { CarList } from '../components/CarList';
 
-const CarPage = ({ match }) => {
+const CarPage = () => {
   return (
     <div>
       <CarList />

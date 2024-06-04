@@ -1,44 +1,76 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { Button, Table } from "antd";
 import axios from "axios";
 import { AdminModal } from "./Modal";
 import openNotification from "./notice";
+import { Search } from "./Search";
 
 import "./styles.css";
 
-const PaginatedTable = () => {
-  const [data, setData] = useState([]);
+const PaginatedTable = ({ isAdmin, cars }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [deleteProduct, setDeleteProduct] = useState(null);
+  const [data, setData] = useState(cars ?? []);
   const [loading, setLoading] = useState(false);
   const [pagination, setPagination] = useState({
     current: 1,
     pageSize: 10,
     total: 0,
   });
+  const cancelTokenSource = useRef(null);
+
+  useEffect(() => {
+    cars && setData(cars);
+  }, [cars]);
+
+  useEffect(() => {
+    if (!isModalOpen) {
+      setSelectedProduct(null);
+    }
+  }, [isModalOpen]);
 
   const fetchData = async (params = {}) => {
-    setLoading(true);
     try {
+      if (cancelTokenSource.current) {
+        cancelTokenSource.current.cancel(
+          "Operation canceled due to new request."
+        );
+      }
+
+      cancelTokenSource.current = axios.CancelToken.source();
+      setLoading(true);
+
       const response = await axios.get(`${process.env.REACT_APP_API_URL}/api`, {
         params: {
           _page: params.pagination.current,
           _limit: params.pagination.pageSize,
+          search: params.search,
         },
+        cancelToken: cancelTokenSource.current.token,
       });
 
       setData(response.data.data);
       setPagination({
         ...params.pagination,
-        total: parseInt(response.headers["x-total-count"], 10),
+        total: response.data.total,
       });
     } catch (error) {
-      console.error("Failed to fetch data:", error);
+      if (axios.isCancel(error)) {
+        console.log("Request canceled", error.message);
+      } else {
+        console.error("Failed to fetch data:", error);
+      }
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchData({ pagination });
+    if (!cars) {
+      fetchData({ pagination });
+    }
   }, []);
 
   const handleTableChange = (pagination) => {
@@ -53,6 +85,7 @@ const PaginatedTable = () => {
       dataIndex: "name",
       key: "name",
       _id: "name",
+      render: (e, r) => <Link to={`/catalogue/${r._id}`}>{e}</Link>,
     },
     {
       title: "Model",
@@ -66,7 +99,6 @@ const PaginatedTable = () => {
       key: "year",
       _id: "year",
     },
-
     {
       title: "Type",
       dataIndex: "type",
@@ -75,7 +107,7 @@ const PaginatedTable = () => {
     },
     {
       title: "Body Chassis",
-      name: "bodyChassis",
+      dataIndex: "bodyChassis",
       key: "bodyChassis",
       _id: "bodyChassis",
     },
@@ -151,52 +183,50 @@ const PaginatedTable = () => {
       key: "bendixEur",
       _id: "bendixEur",
     },
-    {
-      title: "Edit",
-      dataIndex: "edit",
-      key: "edit",
-      _id: "edit",
-      render: (e, r) => {
-        return (
-          <Button
-            type="primary"
-            onClick={() => {
-              setIsModalOpen(true);
-              setSelectedProduct(r);
-              setDeleteProduct(null);
-            }}
-          >
-            Edit
-          </Button>
-        );
-      },
-    },
-    {
-      title: "Delete",
-      dataIndex: "delete",
-      key: "delete",
-      _id: "delete",
-      render: (e, t) => (
-        <Button
-          type="primary"
-          danger
-          onClick={() => {
-            setIsModalOpen(true);
-            setDeleteProduct(t._id);
-          }}
-        >
-          Delete
-        </Button>
-      ),
-    },
+    ...(isAdmin
+      ? [
+          {
+            title: "Edit",
+            dataIndex: "edit",
+            key: "edit",
+            _id: "edit",
+            render: (_, r) => (
+              <Button
+                type="primary"
+                onClick={() => {
+                  setSelectedProduct(r);
+                  setIsModalOpen(true);
+                  setDeleteProduct(null);
+                }}
+              >
+                Edit
+              </Button>
+            ),
+          },
+          {
+            title: "Delete",
+            dataIndex: "delete",
+            key: "delete",
+            _id: "delete",
+            render: (_, t) => (
+              <Button
+                danger
+                onClick={() => {
+                  setIsModalOpen(true);
+                  setDeleteProduct(t._id);
+                }}
+              >
+                Delete
+              </Button>
+            ),
+          },
+        ]
+      : []),
   ];
-
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [deleteProduct, setDeleteProduct] = useState(null);
 
   return (
     <>
+      {!cars && <Search onChange={(search) => fetchData({ pagination, search })} />}
       <Table
         columns={columns}
         rowKey={(record) => record.id}
@@ -207,44 +237,48 @@ const PaginatedTable = () => {
         className="antd-table"
       />
 
-      <AdminModal
-        isModalOpen={isModalOpen}
-        setIsModalOpen={() => {
-          setIsModalOpen(false);
-          setSelectedProduct(null);
-        }}
-        selectedProduct={selectedProduct}
-        deleteProduct={deleteProduct}
-        editItem={(e) => {
-          const updatedData = data.map((item) =>
-            item._id === e._id ? { ...item, ...e } : item
-          );
+      {isModalOpen && (
+        <AdminModal
+          isModalOpen={isModalOpen}
+          setIsModalOpen={() => {
+            setSelectedProduct(null);
+            setIsModalOpen(false);
+          }}
+          selectedProduct={selectedProduct}
+          deleteProduct={deleteProduct}
+          editItem={(e) => {
+            const updatedData = data.map((item) =>
+              item._id === e._id ? { ...item, ...e } : item
+            );
 
-          setData(updatedData);
-          setSelectedProduct(null);
-        }}
-        removeItem={async (id) => {
-          try {
-            await axios.delete(`${process.env.REACT_APP_API_URL}/api/${id}`, {
-              headers: {
-                Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-              },
-            });
+            setData(updatedData);
+            setSelectedProduct(null);
+          }}
+          removeItem={async (id) => {
+            try {
+              await axios.delete(`${process.env.REACT_APP_API_URL}/api/${id}`, {
+                headers: {
+                  Authorization: `Bearer ${localStorage.getItem(
+                    "access_token"
+                  )}`,
+                },
+              });
 
-            setData((prev) => prev.filter((e) => e._id !== id));
+              setData((prev) => prev.filter((e) => e._id !== id));
 
-            openNotification({
-              descriptions: "Product has been successfully deleted!",
-              messages: "Success",
-            });
-          } catch (e) {
-            openNotification({
-              descriptions: "Something went wrong!",
-              messages: e,
-            });
-          }
-        }}
-      />
+              openNotification({
+                descriptions: "Product has been successfully deleted!",
+                messages: "Success",
+              });
+            } catch (e) {
+              openNotification({
+                descriptions: "Something went wrong!",
+                messages: e,
+              });
+            }
+          }}
+        />
+      )}
     </>
   );
 };

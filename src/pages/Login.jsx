@@ -34,7 +34,7 @@ const LoginPage = () => {
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+    console.error("Failed:", errorInfo);
   };
 
   return (
@@ -66,11 +66,7 @@ const LoginPage = () => {
       </Form.Item>
 
       <Form.Item wrapperCol={{ offset: 8, span: 16 }} className="loginBtn">
-        <Button
-          type="primary"
-          htmlType="submit"
-          style={{ float: "right" }}
-        >
+        <Button type="primary" htmlType="submit" style={{ float: "right" }}>
           Login
         </Button>
       </Form.Item>

@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Form, Input } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 import axios from "axios";
 import openNotification from "./notice";
+import ImageUpload from "./ImageUpload";
 
 import "./styles.css";
-
-const normFile = (e) => (Array.isArray(e) ? e : e?.fileList);
 
 const formItems = [
   { name: "name", rules: [], label: "Name" },
@@ -47,26 +46,28 @@ const formItems = [
 ];
 
 export const FormDisabledDemo = ({ selectedProduct, onOk }) => {
-  const [base64String, setBase64String] = useState(
-    selectedProduct?.image ?? ""
-  );
+  const [imageReview, setImageReview] = useState();
   const [form] = Form.useForm();
 
-  const handleFileSelection = (event) => {
-    if (event?.target?.files) {
-      const file = event.target.files[0];
-      if (file && file.type.startsWith("image/")) {
-        const reader = new FileReader();
+  useEffect(() => {
+    setImageReview(selectedProduct?.image ?? "");
+  }, [selectedProduct]);
 
-        reader.onload = (loadEvent) => {
-          const base64 = loadEvent?.target?.result;
-          setBase64String(base64);
-        };
+  // const handleFileSelection = (event) => {
+  //   if (event?.target?.files) {
+  //     const file = event.target.files[0];
+  //     if (file && file.type.startsWith("image/")) {
+  //       const reader = new FileReader();
 
-        reader.readAsDataURL(file);
-      }
-    }
-  };
+  //       reader.onload = (loadEvent) => {
+  //         const base64 = loadEvent?.target?.result;
+  //         setImageReview(base64);
+  //       };
+
+  //       reader.readAsDataURL(file);
+  //     }
+  //   }
+  // };
 
   const sendRequest = async (method, url, values) => {
     try {
@@ -105,7 +106,7 @@ export const FormDisabledDemo = ({ selectedProduct, onOk }) => {
     const method = selectedProduct ? "put" : "post";
 
     form.resetFields();
-    await sendRequest(method, url, { ...values, image: base64String });
+    await sendRequest(method, url, { ...values, image: imageReview });
   };
 
   const onFinishFailed = () => {
@@ -120,7 +121,7 @@ export const FormDisabledDemo = ({ selectedProduct, onOk }) => {
       labelCol={{ span: 4 }}
       wrapperCol={{ span: 14 }}
       layout="horizontal"
-      style={{ maxWidth: 600, margin: "0 auto" }}
+      style={{ maxWidth: 600, margin: "0 auto", padding: "0 20px" }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       form={form}
@@ -140,12 +141,13 @@ export const FormDisabledDemo = ({ selectedProduct, onOk }) => {
           rules={e?.rules}
           name={e.name}
           required={false}
+          key={e.label}
         >
           <Input placeholder={e.label} />
         </Form.Item>
       ))}
 
-      <Form.Item
+      {/* <Form.Item
         label="Upload"
         valuePropName="image"
         getValueFromEvent={normFile}
@@ -162,22 +164,34 @@ export const FormDisabledDemo = ({ selectedProduct, onOk }) => {
           <input
             id="imageUpload"
             className={`uploadFileInput uploadFileInput`}
-            disabled={!!base64String}
+            disabled={!!imageReview}
             onChange={handleFileSelection}
             name="file"
             type="file"
           />
         </div>
-      </Form.Item>
+      </Form.Item> */}
 
-      {base64String && (
+      <ImageUpload
+        upload={async (image) => {
+          setImageReview(image);
+        }}
+        review={() => {}}
+      />
+
+      {
         <div className="imageReview">
           <div />
-          <DeleteOutlined onClick={() => setBase64String("")} />
-          <img src={base64String} width={100} alt="image" />
+          <DeleteOutlined onClick={() => setImageReview("")} />
+          {imageReview && (
+            <img
+              src={`${process.env.REACT_APP_API_URL}${imageReview}`}
+              width={100}
+              alt="image"
+            />
+          )}
         </div>
-      )}
-
+      }
       <Form.Item>
         <Button htmlType="submit">{selectedProduct ? "Edit" : "Add"}</Button>
       </Form.Item>

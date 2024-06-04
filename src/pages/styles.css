@@ -1,3 +1,20 @@
 .loginBtn > div {
-    width: fit-content;
+  width: fit-content;
 }
+
+/* car details */
+
+.carDetails {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 50px;
+  font-size: 14px;
+}
+
+.carDetails>div{
+    max-width: 350px;
+    width: 100%;
+}
+
+/* end car details */

@@ -29,9 +29,11 @@ export const AdminModal = ({
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
-        >
+        footer={selectedProduct?._id && null}
+        okText={removeItem ? <>Remove</> : <>Ok</>}
+      >
         {selectedProduct?._id ? (
-            <>
+          <>
             <FormDisabledDemo
               selectedProduct={selectedProduct}
               onOk={(e) => {

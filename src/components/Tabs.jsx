@@ -7,7 +7,7 @@ const items = [
   {
     key: "1",
     label: "Products",
-    children: <PaginatedTable />,
+    children: <PaginatedTable isAdmin />,
   },
   {
     key: "2",
