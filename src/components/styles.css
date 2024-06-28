@@ -20,6 +20,8 @@ body {
   height: 60px;
   background-color: #d7dced;
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .menu-icon {
