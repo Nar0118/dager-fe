@@ -6,28 +6,29 @@ const Filters = ({ data, onFilter, onReset }) => {
     name: "",
     model: "",
     year: "",
-    type: "",
-    bodyChassis: "",
-    discThicknessMax: "",
-    numOfHoles: "",
-    engineVal: "",
-    height: "",
-    centeringDiameter: "",
-    engineNo: "",
-    frontRear: "",
-    outter: "",
-    pitchCircle: "",
-    drum: "",
-    bendix: "",
-    bendixEur: "",
-    oem: "",
-    vag: "",
-    image: "",
   });
 
   const handleChange = (type, value) => {
     const updatedFilters = { ...filters, [type]: value };
     setFilters(updatedFilters);
+  };
+  const getData = () => {
+    const newData = [];
+
+    for (let i = 0; i < data.length; i++) {
+      const element = data[i];
+      if (newData.every((e) => !e.name.includes(element.name))) {
+        newData.push(element);
+      }
+    }
+
+    return newData?.map((item) => {
+      return {
+        ...item,
+        value: item.name,
+        label: item.name,
+      };
+    });
   };
 
   useEffect(() => {
@@ -49,49 +50,55 @@ const Filters = ({ data, onFilter, onReset }) => {
   return (
     <Space wrap>
       <Select
-        defaultValue="Maker"
-        style={{ width: 120 }}
+        showSearch
+        style={{ width: 200 }}
+        placeholder="Maker"
+        optionFilterProp="label"
         onChange={(e) => handleChange("name", e)}
-        options={data?.map((item) => {
+        options={getData()}
+      />
+
+      <Select
+        showSearch
+        style={{ width: 200 }}
+        placeholder="Model"
+        optionFilterProp="label"
+        disabled={!filters?.name}
+        onChange={(e) => handleChange("model", e)}
+        options={[
+          ...new Set(
+            data.filter((e) => e.name === filters.name).map((e) => e.model)
+          ),
+        ].map((item) => {
           return {
-            ...item,
-            value: item.name,
-            label: item.name,
+            value: item,
+            label: item,
           };
         })}
       />
+
       <Select
-        defaultValue="Model"
-        style={{ width: 120 }}
-        // loading
-        disabled={!filters?.name}
-        onChange={(e) => handleChange("model", e)}
-        options={data
-          ?.filter((e) => e.name === filters.name)
-          ?.map((item) => {
-            return {
-              ...item,
-              value: item.model,
-              label: item.model,
-            };
-          })}
-      />
-      <Select
+        showSearch
         defaultValue="Year"
         style={{ width: 120 }}
         // allowClear
         disabled={!filters?.name || !filters?.model}
-        options={data
-          ?.filter((e) => e.name === filters.name && e.model === filters.model)
-          ?.map((item) => {
+        onChange={(e) => handleChange("year", e)}
+        options={[
+          ...new Set(
+            data.filter((e) => e.name === filters.name).map((e) => e.year)
+          ),
+        ]
+          .sort()
+          .map((item) => {
             return {
-              ...item,
-              value: item.year,
-              label: item.year,
+              value: item,
+              label: item,
             };
           })}
       />
-      <Select
+      {/* <Select
+        showSearch
         defaultValue="Body / Chasis"
         style={{ width: 120 }}
         disabled={!filters?.name || !filters?.model}
@@ -104,38 +111,53 @@ const Filters = ({ data, onFilter, onReset }) => {
               label: item.bodyChassis,
             };
           })}
-      />
+      /> */}
       <Select
+        showSearch
         defaultValue="Engine Vol"
         style={{ width: 120 }}
         // loading
         disabled={!filters?.name || !filters?.model}
-        options={data
-          ?.filter((e) => e.name === filters.name && e.model === filters.model)
-          ?.map((item) => {
-            return {
-              ...item,
-              value: item.engineVal,
-              label: item.engineVal,
-            };
-          })}
+        onChange={(e) => handleChange("year", e)}
+        options={[
+          ...new Set(
+            data.filter((e) => e.name === filters.name).map((e) => e.engineVal)
+          ),
+        ].map((item) => {
+          return {
+            value: item,
+            label: item,
+          };
+        })}
       />
       <Select
+        showSearch
         defaultValue="Engine No"
         style={{ width: 120 }}
         // allowClear
         disabled={!filters?.name || !filters?.model}
-        options={data
-          ?.filter((e) => e.name === filters.name && e.model === filters.model)
-          ?.map((item) => {
-            return {
-              ...item,
-              value: item.engineNo,
-              label: item.engineNo,
-            };
-          })}
+        options={[
+          ...new Set(
+            data.filter((e) => e.name === filters.name).map((e) => e.engineNo)
+          ),
+        ].map((item) => {
+          return {
+            value: item,
+            label: item,
+          };
+        })}
       />
-      <Button onClick={() => onReset()}>Reset</Button>
+      <Button
+        onClick={() => {
+          setFilters({
+            name: "",
+            model: "",
+            year: "",
+          });
+        }}
+      >
+        Reset
+      </Button>
     </Space>
   );
 };

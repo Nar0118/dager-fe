@@ -4,10 +4,10 @@ import axios from "axios";
 
 import "./styles.css";
 
-const RecommendProduct = ({ car }) => {
+const RecommendProduct = ({ car, isFilter }) => {
   const [collapseData, setCollapseData] = useState([]);
   const onChange = (key) => {
-    console.log(key);
+    // console.log(key);
   };
 
   const fetchProducts = async () => {
@@ -19,19 +19,81 @@ const RecommendProduct = ({ car }) => {
         },
       });
 
+      const datum = isFilter ? data.data : car;
+
       setCollapseData(
-        data.data
-          .filter((e) => e._id !== car._id)
+        datum
+          // .filter((e) => e._id !== car._id)
           .map((r) => {
             return {
               ...r,
               label: `${r.name} » ${r.model}`,
               children: (
-                <div className="collapseColumns">
-                  <div>{car.years}</div>
-                  <div>{car.engineVal}</div>
-                  <div>{car.engineNo}</div>
-                  <div>{car.bodyChassis}</div>
+                <div
+                  className={`collapseColumns ${
+                    r?.PARKINGSHOE ? "collapseColumns9" : "collapseColumns8"
+                  }`}
+                >
+                  <p>
+                    <p>Name</p>
+                    <hr />
+                    {r.name}
+                  </p>
+                  <p>
+                    <p>Years</p>
+                    <hr />
+                    {r.year}
+                  </p>
+                  <p>
+                    <p>Eng</p>
+                    <hr />
+                    {r.engineVal}
+                  </p>
+                  <p>
+                    <p>Eng No</p>
+                    <hr />
+                    {r.engineNo}
+                  </p>
+                  <p>
+                    <p>FRONT ROTOR</p>
+                    <hr />
+                    <a href={`/catalogue/${r._id}?FRONTROTOR`} target="_blank">
+                      {r.FRONTROTOR.marka}
+                    </a>
+                  </p>
+                  <p>
+                    <p>FRONT BRAKE</p>
+                    <hr />
+                    <a href={`/catalogue/${r._id}?FRONTBRAKE`} target="_blank">
+                      {r.FRONTBRAKE.marka}
+                    </a>
+                  </p>
+                  <p>
+                    <p> REAR ROTOR </p>
+                    <hr />
+                    <a href={`/catalogue/${r._id}?REARROTOR`} target="_blank">
+                      {r.REARROTOR.marka}
+                    </a>
+                  </p>
+                  <p>
+                    <p>REAR BRAKE</p>
+                    <hr />
+                    <a href={`/catalogue/${r._id}?REARBRAKE`} target="_blank">
+                      {r.REARBRAKE.marka}
+                    </a>
+                  </p>
+                  {!!r?.PARKINGSHOE && (
+                    <p>
+                      <p>PARKING SHOE</p>
+                      <hr />
+                      <a
+                        href={`/catalogue/${r._id}?PARKINGSHOE`}
+                        target="_blank"
+                      >
+                        {r?.PARKINGSHOE?.marka}
+                      </a>
+                    </p>
+                  )}
                 </div>
               ),
             };
@@ -48,19 +110,14 @@ const RecommendProduct = ({ car }) => {
 
   return (
     <>
-      <div className="collapseColumns">
-        <div>Years</div>
-        <div>Eng</div>
-        <div>Eng No</div>
-        <div>Body</div>
-      </div>
-      <br />
-      <br />
-      <Collapse
-        items={collapseData}
-        defaultActiveKey={["1"]}
-        onChange={onChange}
-      />
+      {collapseData?.length ? (
+        <Collapse
+          items={collapseData}
+          // defaultActiveKey={["1"]}
+          onChange={onChange}
+          className="collapse"
+        />
+      ) : null}
     </>
   );
 };

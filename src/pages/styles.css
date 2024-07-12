@@ -12,9 +12,15 @@
   font-size: 14px;
 }
 
-.carDetails>div{
-    max-width: 350px;
-    width: 100%;
+.carDetails > div {
+  max-width: 350px;
+  width: 100%;
 }
 
 /* end car details */
+
+@media (max-width: 768px) {
+  .carDetails {
+    padding: 0 15px;
+  }
+}

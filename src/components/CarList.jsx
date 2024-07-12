@@ -3,12 +3,17 @@ import axios from "axios";
 import { Tabs } from "antd";
 import { Search } from "./Search";
 import Filters from "./Filters";
-import PaginatedTable from "./AdminList";
+// import PaginatedTable from "./AdminList";
+
+import "./styles.css";
+import RecommendProduct from "./RecommendProduct";
 
 export const CarList = () => {
   const [cars, setCars] = useState([]);
+  const [allCars, setAllCars] = useState([]);
+  const [current, setCurrent] = useState(1);
   const cancelTokenSource = useRef(null);
-
+  console.log(cars);
   const fetchData = async (search) => {
     try {
       if (cancelTokenSource.current) {
@@ -26,6 +31,7 @@ export const CarList = () => {
       });
 
       setCars(data.data);
+      setAllCars(data.data);
     } catch (e) {
       console.error(e);
     }
@@ -38,17 +44,44 @@ export const CarList = () => {
   const items = [
     {
       key: "1",
-      label: "Search",
+      label: (
+        <div className={current == 1 ? "tabActive" : "tabDeActive"}>Search</div>
+      ),
       children: (
-        <Search onChange={(search) => fetchData({ search })} />
+        <Search
+          onChange={(search) => {
+            const filterData = search
+              ? allCars.filter(
+                  (e) =>
+                    e.FRONTBRAKE.marka
+                      .toLowerCase()
+                      .includes(search.toLowerCase()) ||
+                    e.FRONTROTOR.marka
+                      .toLowerCase()
+                      .includes(search.toLowerCase()) ||
+                    e.REARBRAKE.marka
+                      .toLowerCase()
+                      .includes(search.toLowerCase()) ||
+                    e.REARROTOR.marka
+                      .toLowerCase()
+                      .includes(search.toLowerCase())
+                )
+              : allCars;
+            setCars(filterData);
+          }}
+        />
       ),
     },
     {
       key: "2",
-      label: "Filters",
+      label: (
+        <div className={current == 2 ? "tabActive" : "tabDeActive"}>
+          Filters
+        </div>
+      ),
       children: (
         <Filters
-          data={cars}
+          data={allCars}
           onFilter={(filteredData) => {
             setCars(filteredData);
           }}
@@ -59,23 +92,17 @@ export const CarList = () => {
   ];
 
   return (
-    <div>
+    <div className="tabsContainer">
       <h2>Car Catalogue</h2>
       <Tabs
         defaultActiveKey="1"
         items={items}
+        onChange={(e) => {
+          setCurrent(e);
+        }}
       />
       <br />
-      <PaginatedTable cars={cars} />
-      {/* <ul>
-        {cars.map((car) => (
-          <li key={car._id}>
-            <Link to={`/catalogue/${car._id}`}>
-              {car.name} {car.model} ({car.year})
-            </Link>
-          </li>
-        ))}
-      </ul> */}
+      <RecommendProduct car={cars} />
     </div>
   );
 };

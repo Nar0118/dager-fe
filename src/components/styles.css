@@ -152,7 +152,6 @@ body {
   }
 }
 
-
 /* end notice */
 
 /* collapse */
@@ -160,11 +159,70 @@ body {
 .collapseColumns {
   width: 100%;
   height: 50px;
-  display: flex;
-  justify-content: space-around;
+  display: grid;
+  /* grid-template-columns: 180px 180px 180px 180px 180px 180px 180px 180px 180px; */
+  align-items: center;
+  overflow-x: auto;
+  height: auto;
+}
+
+.collapseColumns8 {
+  grid-template-columns: 200px 200px 200px 200px 200px 200px 200px 200px;
+}
+
+.collapseColumns9 {
+  grid-template-columns: 180px 180px 180px 180px 180px 180px 180px 180px 180px;
+}
+
+.collapseColumns p,
+.collapseColumns div {
+  color: #000 !important;
 }
 
 /* collapse end */
+
+/* tabs */
+.tabActive {
+  background: #f26722;
+  border-radius: 23px;
+  padding: 7px 40px;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.tabDeActive {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+:global(.ant-tabs-tab) {
+  margin: auto !important;
+}
+
+:global(.ant-tabs-nav-list) {
+  margin: auto !important;
+}
+
+/* tabs end */
+
+/* collapse */
+
+.collapse {
+  background: #232323 !important;
+}
+
+.collapse div {
+  color: #fff !important;
+}
+
+/* end collapse */
+
+.recommendedItems {
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+}
 
 @media (max-width: 768px) {
   .nav-elements ul li:not(:last-child) {
@@ -201,5 +259,11 @@ body {
   .nav-elements ul li {
     margin-right: unset;
     margin-top: 22px;
+  }
+}
+
+@layer antd {
+  :where(.ant-tabs-ink-bar) {
+    background-color: transparent !important;
   }
 }

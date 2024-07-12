@@ -63,9 +63,9 @@ export const Navbar = () => {
               </>
             ) : (
               <li>
-                <Link to="/login" onClick={handleShowNavbar}>
+                {/* <Link to="/login" onClick={handleShowNavbar}>
                   Login
-                </Link>
+                </Link> */}
               </li>
             )}
           </ul>
