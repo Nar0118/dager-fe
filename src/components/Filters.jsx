@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Button, Select, Space } from "antd";
 
 const Filters = ({ data, onFilter, onReset }) => {
+  const { t, i18n } = useTranslation();
   const [filters, setFilters] = useState({
     name: "",
     model: "",
@@ -52,7 +54,7 @@ const Filters = ({ data, onFilter, onReset }) => {
       <Select
         showSearch
         style={{ width: 200 }}
-        placeholder="Maker"
+        placeholder={t("Maker")}
         optionFilterProp="label"
         onChange={(e) => handleChange("name", e)}
         options={getData()}
@@ -61,7 +63,7 @@ const Filters = ({ data, onFilter, onReset }) => {
       <Select
         showSearch
         style={{ width: 200 }}
-        placeholder="Model"
+        placeholder={t("Model")}
         optionFilterProp="label"
         disabled={!filters?.name}
         onChange={(e) => handleChange("model", e)}
@@ -79,7 +81,7 @@ const Filters = ({ data, onFilter, onReset }) => {
 
       <Select
         showSearch
-        defaultValue="Year"
+        defaultValue={t("Year")}
         style={{ width: 120 }}
         // allowClear
         disabled={!filters?.name || !filters?.model}
@@ -114,7 +116,7 @@ const Filters = ({ data, onFilter, onReset }) => {
       /> */}
       <Select
         showSearch
-        defaultValue="Engine Vol"
+        defaultValue={t("Engine Vol")}
         style={{ width: 120 }}
         // loading
         disabled={!filters?.name || !filters?.model}
@@ -132,7 +134,7 @@ const Filters = ({ data, onFilter, onReset }) => {
       />
       <Select
         showSearch
-        defaultValue="Engine No"
+        defaultValue={t("Engine No")}
         style={{ width: 120 }}
         // allowClear
         disabled={!filters?.name || !filters?.model}
@@ -156,7 +158,7 @@ const Filters = ({ data, onFilter, onReset }) => {
           });
         }}
       >
-        Reset
+        {t("Reset")}
       </Button>
     </Space>
   );

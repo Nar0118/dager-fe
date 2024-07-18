@@ -40,7 +40,6 @@ const PaginatedTable = ({ isAdmin, cars }) => {
       }
 
       cancelTokenSource.current = axios.CancelToken.source();
-      setLoading(true);
 
       const response = await axios.get(`${process.env.REACT_APP_API_URL}/api`, {
         params: {
@@ -69,6 +68,7 @@ const PaginatedTable = ({ isAdmin, cars }) => {
 
   useEffect(() => {
     if (!cars) {
+      setLoading(true);
       fetchData({ pagination });
     }
   }, []);
@@ -99,18 +99,18 @@ const PaginatedTable = ({ isAdmin, cars }) => {
       key: "year",
       _id: "year",
     },
-    {
-      title: "Type",
-      dataIndex: "type",
-      key: "type",
-      _id: "type",
-    },
-    {
-      title: "Body Chassis",
-      dataIndex: "bodyChassis",
-      key: "bodyChassis",
-      _id: "bodyChassis",
-    },
+    // {
+    //   title: "Type",
+    //   dataIndex: "type",
+    //   key: "type",
+    //   _id: "type",
+    // },
+    // {
+    //   title: "Body Chassis",
+    //   dataIndex: "bodyChassis",
+    //   key: "bodyChassis",
+    //   _id: "bodyChassis",
+    // },
     {
       title: "Engine Val",
       dataIndex: "engineVal",

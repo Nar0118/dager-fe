@@ -3,9 +3,11 @@ import { Collapse } from "antd";
 import axios from "axios";
 
 import "./styles.css";
+import { useTranslation } from "react-i18next";
 
 const RecommendProduct = ({ car, isFilter }) => {
   const [collapseData, setCollapseData] = useState([]);
+  const { t, i18n } = useTranslation();
   const onChange = (key) => {
     // console.log(key);
   };
@@ -35,48 +37,48 @@ const RecommendProduct = ({ car, isFilter }) => {
                   }`}
                 >
                   <p>
-                    <p>Name</p>
+                    <p>{t("Name")}</p>
                     <hr />
                     {r.name}
                   </p>
                   <p>
-                    <p>Years</p>
+                    <p>{t("Year")}</p>
                     <hr />
                     {r.year}
                   </p>
                   <p>
-                    <p>Eng</p>
+                    <p>{t("Engine Vol")}</p>
                     <hr />
                     {r.engineVal}
                   </p>
                   <p>
-                    <p>Eng No</p>
+                    <p>{t("Engine No")}</p>
                     <hr />
                     {r.engineNo}
                   </p>
                   <p>
-                    <p>FRONT ROTOR</p>
+                    <p>{t("FRONT ROTOR")}</p>
                     <hr />
                     <a href={`/catalogue/${r._id}?FRONTROTOR`} target="_blank">
                       {r.FRONTROTOR.marka}
                     </a>
                   </p>
                   <p>
-                    <p>FRONT BRAKE</p>
+                    <p>{t("FRONT BRAKE")}</p>
                     <hr />
                     <a href={`/catalogue/${r._id}?FRONTBRAKE`} target="_blank">
                       {r.FRONTBRAKE.marka}
                     </a>
                   </p>
                   <p>
-                    <p> REAR ROTOR </p>
+                    <p>{t("REAR ROTOR")}</p>
                     <hr />
                     <a href={`/catalogue/${r._id}?REARROTOR`} target="_blank">
                       {r.REARROTOR.marka}
                     </a>
                   </p>
                   <p>
-                    <p>REAR BRAKE</p>
+                    <p>{t("REAR BRAKE")}</p>
                     <hr />
                     <a href={`/catalogue/${r._id}?REARBRAKE`} target="_blank">
                       {r.REARBRAKE.marka}

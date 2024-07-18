@@ -17,7 +17,7 @@ const items = [
 ];
 
 function AdminTabs() {
-  return <Tabs defaultActiveKey="1" items={items} />;
+  return <Tabs defaultActiveKey="2" items={items} />;
 }
 
 export default AdminTabs;

@@ -14,10 +14,12 @@ const formItems = [
     name: "year",
     label: "Year",
   },
-  { name: "type", label: "Type" },
-  { name: "bodyChassis", label: "Body Chassis" },
   { name: "engineVal", label: "Engine Val" },
   { name: "engineNo", label: "Engine No" },
+];
+
+const FRONTROTORformItems = [
+  { name: "type", label: "Type" },
   {
     name: "discThicknessMax",
     label: "Disc Thickness Max.",
@@ -28,29 +30,107 @@ const formItems = [
     name: "centeringDiameter",
     label: "Centering Diameter",
   },
-  { name: "frontRear", label: "Front/Rear" },
-  {
-    name: "outter",
-    label: "Outter",
-  },
   {
     name: "pitchCircle",
     label: "Pitch Circle",
   },
   {
+    name: "outter",
+    label: "Outter",
+  },
+  {
     name: "drum",
     label: "Drum",
   },
-  { name: "bendix", label: "Bendix" },
-  { name: "bendixEur", label: "Bendix Eur" },
+  { name: "marka", label: "Marka" },
+];
+
+const FRONTBRAKEformItems = [
+  { name: "Length-1", label: "Length" },
+  {
+    name: "Width-1",
+    label: "Width",
+  },
+  { name: "Thickness-1", label: "Thickness" },
+  {
+    name: "discThicknessMax1",
+    label: "Disc Thickness Max",
+  },
+  { name: "numOfHoles1", label: "Num Of Holes" },
+  {
+    name: "Pcs In Set",
+    label: "Pcs In Set",
+  },
+  {
+    name: "Brake System",
+    label: "Brake System",
+  },
+  { name: "marka1", label: "Marka" },
+];
+
+const REARROTORformItems = [
+  { name: "type", label: "Type" },
+  {
+    name: "discThicknessMax2",
+    label: "Disc Thickness Max",
+  },
+  { name: "numOfHoles2", label: "Num Of Holes" },
+  { name: "height", label: "Height" },
+  { name: "centeringDiameter1", label: "Centering Diameter" },
+  { name: "pitchCircle1", label: "Pitch Circle" },
+  { name: "outter1", label: "Outter" },
+  { name: "drum1", label: "Drum" },
+  { name: "marka2", label: "Marka" },
+];
+
+const REARBRAKEformItems = [
+  { name: "Length-1", label: "Length" },
+  {
+    name: "Width-1",
+    label: "Width",
+  },
+  { name: "Thickness-1", label: "Thickness" },
+  {
+    name: "discThicknessMax3",
+    label: "Disc Thickness Max",
+  },
+  { name: "numOfHoles3", label: "Num Of Holes" },
+  {
+    name: "Pcs In Set",
+    label: "Pcs In Set",
+  },
+  {
+    name: "Brake System",
+    label: "Brake System",
+  },
+  { name: "marka3", label: "Marka" },
+];
+
+const PARKINGSHOEformItems = [
+  { name: "Radius", label: "Radius" },
+  {
+    name: "Width-1",
+    label: "Width",
+  },
+  {
+    name: "Pcs In Set",
+    label: "Pcs In Set",
+  },
+  { name: "Thickness-1", label: "Thickness" },
+
+  { name: "marka4", label: "Marka" },
 ];
 
 export const FormDisabledDemo = ({ selectedProduct, onOk }) => {
-  const [imageReview, setImageReview] = useState();
+  const [FRONTROTORimageReview, setFRONTROTORImageReview] = useState();
+  const [FRONTBRAKEimageReview, setFRONTBRAKEImageReview] = useState();
+  const [REARROTORimageReview, setREARROTORImageReview] = useState();
+  const [REARBRAKEimageReview, setREARBRAKEImageReview] = useState();
+  const [PARKINGSHOEimageReview, setPARKINGSHOEImageReview] = useState();
   const [form] = Form.useForm();
 
   useEffect(() => {
-    setImageReview(selectedProduct?.image ?? "");
+    setFRONTROTORImageReview(selectedProduct?.image ?? "");
   }, [selectedProduct]);
 
   // const handleFileSelection = (event) => {
@@ -99,6 +179,14 @@ export const FormDisabledDemo = ({ selectedProduct, onOk }) => {
   };
 
   const onFinish = async (values) => {
+
+    console.log(values, 222222);
+    console.log(FRONTROTORimageReview, 2222222);
+    console.log(FRONTBRAKEimageReview, 2222222);
+    console.log(REARROTORimageReview, 2222222);
+    console.log(REARBRAKEimageReview, 2222222);
+    console.log(PARKINGSHOEimageReview, 2222222);
+return
     const url = selectedProduct
       ? `${process.env.REACT_APP_API_URL}/api/${selectedProduct._id}`
       : `${process.env.REACT_APP_API_URL}/api`;
@@ -106,7 +194,7 @@ export const FormDisabledDemo = ({ selectedProduct, onOk }) => {
     const method = selectedProduct ? "put" : "post";
 
     form.resetFields();
-    await sendRequest(method, url, { ...values, image: imageReview });
+    await sendRequest(method, url, { ...values, image: FRONTROTORimageReview });
   };
 
   const onFinishFailed = () => {
@@ -142,10 +230,186 @@ export const FormDisabledDemo = ({ selectedProduct, onOk }) => {
           name={e.name}
           required={false}
           key={e.label}
+          className={e.name}
         >
           <Input placeholder={e.label} />
         </Form.Item>
       ))}
+
+      <div className="part_item_title">FRONT ROTOR</div>
+      {FRONTROTORformItems.map((e) => (
+        <Form.Item
+          label={e.label}
+          rules={e?.rules}
+          name={e.name}
+          required={false}
+          key={e.label}
+          className={e.name}
+        >
+          <Input placeholder={e.label} />
+        </Form.Item>
+      ))}
+
+      <ImageUpload
+        upload={async (image) => {
+          setFRONTROTORImageReview(image);
+        }}
+        review={() => {}}
+      />
+
+      {
+        <div className="imageReview">
+          <div />
+          <DeleteOutlined onClick={() => setFRONTROTORImageReview("")} />
+          {FRONTROTORimageReview && (
+            <img
+              src={`${process.env.REACT_APP_API_URL}${FRONTROTORimageReview}`}
+              width={100}
+              alt="image"
+            />
+          )}
+        </div>
+      }
+
+      <div className="part_item_title">FRONT BRAKE</div>
+      {FRONTBRAKEformItems.map((e) => (
+        <Form.Item
+          label={e.label}
+          rules={e?.rules}
+          name={e.name}
+          required={false}
+          key={e.label}
+          className={e.name}
+        >
+          <Input placeholder={e.label} />
+        </Form.Item>
+      ))}
+
+      <ImageUpload
+        upload={async (image) => {
+          setFRONTBRAKEImageReview(image);
+        }}
+        review={() => {}}
+      />
+
+      {
+        <div className="imageReview">
+          <div />
+          <DeleteOutlined onClick={() => setFRONTBRAKEImageReview("")} />
+          {FRONTBRAKEimageReview && (
+            <img
+              src={`${process.env.REACT_APP_API_URL}${FRONTBRAKEimageReview}`}
+              width={100}
+              alt="image"
+            />
+          )}
+        </div>
+      }
+
+      <div className="part_item_title">REAR ROTOR</div>
+      {REARROTORformItems.map((e) => (
+        <Form.Item
+          label={e.label}
+          rules={e?.rules}
+          name={e.name}
+          required={false}
+          key={e.label}
+          className={e.name}
+        >
+          <Input placeholder={e.label} />
+        </Form.Item>
+      ))}
+
+      <ImageUpload
+        upload={async (image) => {
+          setREARROTORImageReview(image);
+        }}
+        review={() => {}}
+      />
+
+      {
+        <div className="imageReview">
+          <div />
+          <DeleteOutlined onClick={() => setREARROTORImageReview("")} />
+          {REARROTORimageReview && (
+            <img
+              src={`${process.env.REACT_APP_API_URL}${REARROTORimageReview}`}
+              width={100}
+              alt="image"
+            />
+          )}
+        </div>
+      }
+
+      <div className="part_item_title">REARB RAKE</div>
+      {REARBRAKEformItems.map((e) => (
+        <Form.Item
+          label={e.label}
+          rules={e?.rules}
+          name={e.name}
+          required={false}
+          key={e.label}
+          className={e.name}
+        >
+          <Input placeholder={e.label} />
+        </Form.Item>
+      ))}
+
+      <ImageUpload
+        upload={async (image) => {
+          setREARBRAKEImageReview(image);
+        }}
+        review={() => {}}
+      />
+
+      {
+        <div className="imageReview">
+          <div />
+          <DeleteOutlined onClick={() => setREARBRAKEImageReview("")} />
+          {REARBRAKEimageReview && (
+            <img
+              src={`${process.env.REACT_APP_API_URL}${REARBRAKEimageReview}`}
+              width={100}
+              alt="image"
+            />
+          )}
+        </div>
+      }
+
+      <div className="part_item_title">PARKING SHOE</div>
+      {PARKINGSHOEformItems.map((e) => (
+        <Form.Item
+          label={e.label}
+          rules={e?.rules}
+          name={e.name}
+          required={false}
+          key={e.label}
+          className={e.name}
+        >
+          <Input placeholder={e.label} />
+        </Form.Item>
+      ))}
+
+      <ImageUpload
+        upload={async (image) => {
+          setPARKINGSHOEImageReview(image);
+        }}
+        review={() => {}}
+      />
+
+      {
+        <div className="imageReview">
+          <div />
+          <DeleteOutlined onClick={() => setPARKINGSHOEImageReview("")} />
+          {PARKINGSHOEimageReview && (
+            <img
+              src={`${process.env.REACT_APP_API_URL}${PARKINGSHOEimageReview}`}
+              width={100}
+              alt="image"
+            />
+          )}
+        </div>
+      }
 
       {/* <Form.Item
         label="Upload"
@@ -172,26 +436,6 @@ export const FormDisabledDemo = ({ selectedProduct, onOk }) => {
         </div>
       </Form.Item> */}
 
-      <ImageUpload
-        upload={async (image) => {
-          setImageReview(image);
-        }}
-        review={() => {}}
-      />
-
-      {
-        <div className="imageReview">
-          <div />
-          <DeleteOutlined onClick={() => setImageReview("")} />
-          {imageReview && (
-            <img
-              src={`${process.env.REACT_APP_API_URL}${imageReview}`}
-              width={100}
-              alt="image"
-            />
-          )}
-        </div>
-      }
       <Form.Item>
         <Button htmlType="submit">{selectedProduct ? "Edit" : "Add"}</Button>
       </Form.Item>

@@ -7,9 +7,31 @@ import LoginPage from "./pages/Login";
 import NotFound from "./pages/404";
 import { Navbar } from "./components/Navbar";
 import CarDetails from "./pages/CarDetails";
-import axios from "axios";
 
 function App() {
+  useEffect(() => {
+    const handleClick = (event) => {
+      const navElements = document.querySelectorAll(".nav-elements");
+      if (!event?.target?.id || !event?.target?.id.includes("Rectangle")) {
+        navElements.forEach((element) => {
+          element.classList.remove("active");
+        });
+      }
+    };
+
+    const rootElement = document.getElementById("root");
+
+    if (rootElement) {
+      rootElement.addEventListener("click", handleClick);
+    }
+
+    return () => {
+      if (rootElement) {
+        rootElement.removeEventListener("click", handleClick);
+      }
+    };
+  }, []);
+
   return (
     <Router>
       <Navbar />

@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import axios from "axios";
-import { Tabs } from "antd";
+import { Spin, Tabs } from "antd";
 import { Search } from "./Search";
 import Filters from "./Filters";
 // import PaginatedTable from "./AdminList";
@@ -10,10 +11,12 @@ import RecommendProduct from "./RecommendProduct";
 
 export const CarList = () => {
   const [cars, setCars] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [allCars, setAllCars] = useState([]);
   const [current, setCurrent] = useState(1);
   const cancelTokenSource = useRef(null);
-  console.log(cars);
+  const { t } = useTranslation();
+
   const fetchData = async (search) => {
     try {
       if (cancelTokenSource.current) {
@@ -34,10 +37,13 @@ export const CarList = () => {
       setAllCars(data.data);
     } catch (e) {
       console.error(e);
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
+    setLoading(true);
     fetchData();
   }, []);
 
@@ -45,7 +51,9 @@ export const CarList = () => {
     {
       key: "1",
       label: (
-        <div className={current == 1 ? "tabActive" : "tabDeActive"}>Search</div>
+        <div className={current == 1 ? "tabActive" : "tabDeActive"}>
+          {t("Search")}
+        </div>
       ),
       children: (
         <Search
@@ -76,14 +84,18 @@ export const CarList = () => {
       key: "2",
       label: (
         <div className={current == 2 ? "tabActive" : "tabDeActive"}>
-          Filters
+          {t("Filters")}
         </div>
       ),
       children: (
         <Filters
           data={allCars}
           onFilter={(filteredData) => {
+            setLoading(true);
             setCars(filteredData);
+            setTimeout(() => {
+              setLoading(false);
+            }, 1000);
           }}
           onReset={fetchData}
         />
@@ -102,7 +114,14 @@ export const CarList = () => {
         }}
       />
       <br />
-      <RecommendProduct car={cars} />
+      {loading ? (
+        <div className="loading">
+          {/* <img src="/images/loading.gif" /> */}
+          <Spin size="large" />
+        </div>
+      ) : (
+        <RecommendProduct car={cars} />
+      )}
     </div>
   );
 };

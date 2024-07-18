@@ -35,7 +35,7 @@ body {
 }
 
 .nav-elements {
-  z-index: 1;
+  z-index: 4;
 }
 
 .nav-elements ul li:not(:last-child) {
@@ -183,7 +183,7 @@ body {
 
 /* tabs */
 .tabActive {
-  background: #f26722;
+  background: #22acf2;
   border-radius: 23px;
   padding: 7px 40px;
   color: #fff;
@@ -222,6 +222,20 @@ body {
   max-width: 1100px;
   width: 100%;
   margin: 0 auto;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.FRONTROTOR input {
+  display: none;
+}
+
+.part_item_title {
+  font-size: 30px;
 }
 
 @media (max-width: 768px) {
