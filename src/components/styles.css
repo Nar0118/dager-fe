@@ -238,6 +238,18 @@ body {
   font-size: 30px;
 }
 
+.filterItem {
+  display: grid;
+}
+
+.filterItems {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 20px;
+  /* text-align: center; */
+}
+
 @media (max-width: 768px) {
   .nav-elements ul li:not(:last-child) {
     margin-right: 30px;

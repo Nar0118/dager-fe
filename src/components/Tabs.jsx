@@ -7,7 +7,7 @@ const items = [
   {
     key: "1",
     label: "Products",
-    children: <PaginatedTable isAdmin />,
+    children: <PaginatedTable />,
   },
   {
     key: "2",
@@ -17,7 +17,7 @@ const items = [
 ];
 
 function AdminTabs() {
-  return <Tabs defaultActiveKey="2" items={items} />;
+  return <Tabs defaultActiveKey="1" items={items} />;
 }
 
 export default AdminTabs;

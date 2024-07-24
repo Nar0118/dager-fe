@@ -12,7 +12,7 @@ export const Navbar = () => {
   const { t, i18n } = useTranslation();
   const [admin, setAdmin] = useState(null);
   const navigate = useNavigate();
-
+  console.log("i18n?.language", i18n?.language);
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
   };
@@ -32,6 +32,14 @@ export const Navbar = () => {
 
   const handleShowNavbar = () => {
     setShowNavbar(!showNavbar);
+  };
+
+  const getFlagImage = () => {
+    if (i18n?.language === "en-US") {
+      return "ru";
+    }
+
+    return i18n?.language ?? "ru";
   };
 
   const options = [
@@ -107,7 +115,7 @@ export const Navbar = () => {
                     style={{
                       width: "25px",
                     }}
-                    src={`/images/flags/flag_${i18n?.language ?? "ru"}.svg`}
+                    src={`/images/flags/flag_${getFlagImage()}.svg`}
                   />
                 }
                 onChange={changeLanguage}

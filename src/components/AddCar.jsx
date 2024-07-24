@@ -1,125 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Button, Form, Input } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
 import axios from "axios";
 import openNotification from "./notice";
 import ImageUpload from "./ImageUpload";
+import { flattenData, transformData } from "../utils/functions";
 
 import "./styles.css";
-
-const formItems = [
-  { name: "name", rules: [], label: "Name" },
-  { name: "model", rules: [], label: "Model" },
-  {
-    name: "year",
-    label: "Year",
-  },
-  { name: "engineVal", label: "Engine Val" },
-  { name: "engineNo", label: "Engine No" },
-];
-
-const FRONTROTORformItems = [
-  { name: "type", label: "Type" },
-  {
-    name: "discThicknessMax",
-    label: "Disc Thickness Max.",
-  },
-  { name: "numOfHoles", label: "Num Of Holes" },
-  { name: "height", label: "Height" },
-  {
-    name: "centeringDiameter",
-    label: "Centering Diameter",
-  },
-  {
-    name: "pitchCircle",
-    label: "Pitch Circle",
-  },
-  {
-    name: "outter",
-    label: "Outter",
-  },
-  {
-    name: "drum",
-    label: "Drum",
-  },
-  { name: "marka", label: "Marka" },
-];
-
-const FRONTBRAKEformItems = [
-  { name: "Length-1", label: "Length" },
-  {
-    name: "Width-1",
-    label: "Width",
-  },
-  { name: "Thickness-1", label: "Thickness" },
-  {
-    name: "discThicknessMax1",
-    label: "Disc Thickness Max",
-  },
-  { name: "numOfHoles1", label: "Num Of Holes" },
-  {
-    name: "Pcs In Set",
-    label: "Pcs In Set",
-  },
-  {
-    name: "Brake System",
-    label: "Brake System",
-  },
-  { name: "marka1", label: "Marka" },
-];
-
-const REARROTORformItems = [
-  { name: "type", label: "Type" },
-  {
-    name: "discThicknessMax2",
-    label: "Disc Thickness Max",
-  },
-  { name: "numOfHoles2", label: "Num Of Holes" },
-  { name: "height", label: "Height" },
-  { name: "centeringDiameter1", label: "Centering Diameter" },
-  { name: "pitchCircle1", label: "Pitch Circle" },
-  { name: "outter1", label: "Outter" },
-  { name: "drum1", label: "Drum" },
-  { name: "marka2", label: "Marka" },
-];
-
-const REARBRAKEformItems = [
-  { name: "Length-1", label: "Length" },
-  {
-    name: "Width-1",
-    label: "Width",
-  },
-  { name: "Thickness-1", label: "Thickness" },
-  {
-    name: "discThicknessMax3",
-    label: "Disc Thickness Max",
-  },
-  { name: "numOfHoles3", label: "Num Of Holes" },
-  {
-    name: "Pcs In Set",
-    label: "Pcs In Set",
-  },
-  {
-    name: "Brake System",
-    label: "Brake System",
-  },
-  { name: "marka3", label: "Marka" },
-];
-
-const PARKINGSHOEformItems = [
-  { name: "Radius", label: "Radius" },
-  {
-    name: "Width-1",
-    label: "Width",
-  },
-  {
-    name: "Pcs In Set",
-    label: "Pcs In Set",
-  },
-  { name: "Thickness-1", label: "Thickness" },
-
-  { name: "marka4", label: "Marka" },
-];
 
 export const FormDisabledDemo = ({ selectedProduct, onOk }) => {
   const [FRONTROTORimageReview, setFRONTROTORImageReview] = useState();
@@ -127,10 +15,133 @@ export const FormDisabledDemo = ({ selectedProduct, onOk }) => {
   const [REARROTORimageReview, setREARROTORImageReview] = useState();
   const [REARBRAKEimageReview, setREARBRAKEImageReview] = useState();
   const [PARKINGSHOEimageReview, setPARKINGSHOEImageReview] = useState();
+  const [formattedSelectedProduct, setFormattedSelectedProduct] = useState(
+    flattenData(selectedProduct)
+  );
   const [form] = Form.useForm();
+  const { t } = useTranslation();
+
+  const formItems = [
+    { name: "name", rules: [], label: t("Name") },
+    { name: "model", rules: [], label: t("Model") },
+    {
+      name: "year",
+      label: "Year",
+    },
+    { name: "engineVal", label: t("Engine Val") },
+    { name: "engineNo", label: t("Engine No") },
+  ];
+
+  const FRONTROTORformItems = [
+    { name: "FRONTROTOR_type", label: "Type" },
+    {
+      name: "FRONTROTOR_discThicknessMax",
+      label: "Disc Thickness Max.",
+    },
+    { name: "FRONTROTOR_numOfHoles", label: "Num Of Holes" },
+    { name: "FRONTROTOR_height", label: "Height" },
+    {
+      name: "FRONTROTOR_centeringDiameter",
+      label: "Centering Diameter",
+    },
+    {
+      name: "FRONTROTOR_pitchCircle",
+      label: "Pitch Circle",
+    },
+    {
+      name: "FRONTROTOR_outter",
+      label: "Outter",
+    },
+    {
+      name: "FRONTROTOR_drum",
+      label: "Drum",
+    },
+    { name: "FRONTROTOR_marka", label: "Marka" },
+  ];
+
+  const FRONTBRAKEformItems = [
+    { name: "FRONTBRAKE_Length-1", label: "Length" },
+    {
+      name: "FRONTBRAKE_Width-1",
+      label: "Width",
+    },
+    { name: "FRONTBRAKE_Thickness-1", label: "Thickness" },
+    {
+      name: "FRONTBRAKE_discThicknessMax",
+      label: "Disc Thickness Max",
+    },
+    { name: "FRONTBRAKE_numOfHoles", label: "Num Of Holes" },
+    {
+      name: "FRONTBRAKE_Pcs In Set",
+      label: "Pcs In Set",
+    },
+    {
+      name: "FRONTBRAKE_Brake System",
+      label: "Brake System",
+    },
+    { name: "FRONTBRAKE_marka", label: "Marka" },
+  ];
+
+  const REARROTORformItems = [
+    { name: "REARROTOR_type", label: "Type" },
+    {
+      name: "REARROTOR_discThicknessMax",
+      label: "Disc Thickness Max",
+    },
+    { name: "REARROTOR_numOfHoles", label: "Num Of Holes" },
+    { name: "REARROTOR_height", label: "Height" },
+    { name: "REARROTOR_centeringDiameter", label: "Centering Diameter" },
+    { name: "REARROTOR_pitchCircle", label: "Pitch Circle" },
+    { name: "REARROTOR_outter", label: "Outter" },
+    { name: "REARROTOR_drum", label: "Drum" },
+    { name: "REARROTOR_marka", label: "Marka" },
+  ];
+
+  const REARBRAKEformItems = [
+    { name: "REARBRAKE_Length-1", label: "Length" },
+    {
+      name: "REARBRAKE_Width-1",
+      label: "Width",
+    },
+    { name: "REARBRAKE_Thickness-1", label: "Thickness" },
+    {
+      name: "REARBRAKE_discThicknessMax",
+      label: "Disc Thickness Max",
+    },
+    { name: "REARBRAKE_numOfHoles", label: "Num Of Holes" },
+    {
+      name: "REARBRAKE_Pcs In Set",
+      label: "Pcs In Set",
+    },
+    {
+      name: "REARBRAKE_Brake System",
+      label: "Brake System",
+    },
+    { name: "REARBRAKE_marka", label: "Marka" },
+  ];
+
+  const PARKINGSHOEformItems = [
+    { name: "PARKINGSHOE_Radius", label: "Radius" },
+    {
+      name: "PARKINGSHOE_Width-1",
+      label: "Width",
+    },
+    {
+      name: "PARKINGSHOE_Pcs In Set",
+      label: "Pcs In Set",
+    },
+    { name: "PARKINGSHOE_Thickness-1", label: "Thickness" },
+
+    { name: "PARKINGSHOE_marka", label: "Marka" },
+  ];
 
   useEffect(() => {
-    setFRONTROTORImageReview(selectedProduct?.image ?? "");
+    setFRONTROTORImageReview(selectedProduct?.FRONTROTOR?.image ?? "");
+    setFRONTBRAKEImageReview(selectedProduct?.FRONTBRAKE?.image ?? "");
+    setREARROTORImageReview(selectedProduct?.REARROTOR?.image ?? "");
+    setREARBRAKEImageReview(selectedProduct?.REARBRAKE?.image ?? "");
+    setPARKINGSHOEImageReview(selectedProduct?.PARKINGSHOE?.image ?? "");
+    setFormattedSelectedProduct(flattenData(selectedProduct));
   }, [selectedProduct]);
 
   // const handleFileSelection = (event) => {
@@ -179,14 +190,7 @@ export const FormDisabledDemo = ({ selectedProduct, onOk }) => {
   };
 
   const onFinish = async (values) => {
-
-    console.log(values, 222222);
-    console.log(FRONTROTORimageReview, 2222222);
-    console.log(FRONTBRAKEimageReview, 2222222);
-    console.log(REARROTORimageReview, 2222222);
-    console.log(REARBRAKEimageReview, 2222222);
-    console.log(PARKINGSHOEimageReview, 2222222);
-return
+    const transformedData = await transformData(values);
     const url = selectedProduct
       ? `${process.env.REACT_APP_API_URL}/api/${selectedProduct._id}`
       : `${process.env.REACT_APP_API_URL}/api`;
@@ -194,7 +198,7 @@ return
     const method = selectedProduct ? "put" : "post";
 
     form.resetFields();
-    await sendRequest(method, url, { ...values, image: FRONTROTORimageReview });
+    await sendRequest(method, url, { ...transformedData });
   };
 
   const onFinishFailed = () => {
@@ -213,16 +217,16 @@ return
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       form={form}
-      initialValues={selectedProduct}
+      initialValues={formattedSelectedProduct}
     >
       <h2
         style={{
           textAlign: "center",
+          color: "#000",
         }}
       >
         {selectedProduct ? "Edit" : "Add"} product
       </h2>
-
       {formItems.map((e) => (
         <Form.Item
           label={e.label}
@@ -235,7 +239,6 @@ return
           <Input placeholder={e.label} />
         </Form.Item>
       ))}
-
       <div className="part_item_title">FRONT ROTOR</div>
       {FRONTROTORformItems.map((e) => (
         <Form.Item
@@ -249,14 +252,13 @@ return
           <Input placeholder={e.label} />
         </Form.Item>
       ))}
-
+      111
       <ImageUpload
         upload={async (image) => {
           setFRONTROTORImageReview(image);
         }}
         review={() => {}}
       />
-
       {
         <div className="imageReview">
           <div />
@@ -270,7 +272,6 @@ return
           )}
         </div>
       }
-
       <div className="part_item_title">FRONT BRAKE</div>
       {FRONTBRAKEformItems.map((e) => (
         <Form.Item
@@ -284,14 +285,12 @@ return
           <Input placeholder={e.label} />
         </Form.Item>
       ))}
-
       <ImageUpload
         upload={async (image) => {
           setFRONTBRAKEImageReview(image);
         }}
         review={() => {}}
       />
-
       {
         <div className="imageReview">
           <div />
@@ -305,7 +304,6 @@ return
           )}
         </div>
       }
-
       <div className="part_item_title">REAR ROTOR</div>
       {REARROTORformItems.map((e) => (
         <Form.Item
@@ -319,14 +317,12 @@ return
           <Input placeholder={e.label} />
         </Form.Item>
       ))}
-
       <ImageUpload
         upload={async (image) => {
           setREARROTORImageReview(image);
         }}
         review={() => {}}
       />
-
       {
         <div className="imageReview">
           <div />
@@ -340,7 +336,6 @@ return
           )}
         </div>
       }
-
       <div className="part_item_title">REARB RAKE</div>
       {REARBRAKEformItems.map((e) => (
         <Form.Item
@@ -354,14 +349,12 @@ return
           <Input placeholder={e.label} />
         </Form.Item>
       ))}
-
       <ImageUpload
         upload={async (image) => {
           setREARBRAKEImageReview(image);
         }}
         review={() => {}}
       />
-
       {
         <div className="imageReview">
           <div />
@@ -375,7 +368,6 @@ return
           )}
         </div>
       }
-
       <div className="part_item_title">PARKING SHOE</div>
       {PARKINGSHOEformItems.map((e) => (
         <Form.Item
@@ -389,14 +381,12 @@ return
           <Input placeholder={e.label} />
         </Form.Item>
       ))}
-
       <ImageUpload
         upload={async (image) => {
           setPARKINGSHOEImageReview(image);
         }}
         review={() => {}}
       />
-
       {
         <div className="imageReview">
           <div />
@@ -410,7 +400,6 @@ return
           )}
         </div>
       }
-
       {/* <Form.Item
         label="Upload"
         valuePropName="image"
@@ -435,7 +424,6 @@ return
           />
         </div>
       </Form.Item> */}
-
       <Form.Item>
         <Button htmlType="submit">{selectedProduct ? "Edit" : "Add"}</Button>
       </Form.Item>

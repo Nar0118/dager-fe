@@ -4,10 +4,9 @@ import axios from "axios";
 import { Spin, Tabs } from "antd";
 import { Search } from "./Search";
 import Filters from "./Filters";
-// import PaginatedTable from "./AdminList";
+import RecommendProduct from "./RecommendProduct";
 
 import "./styles.css";
-import RecommendProduct from "./RecommendProduct";
 
 export const CarList = () => {
   const [cars, setCars] = useState([]);
@@ -17,7 +16,14 @@ export const CarList = () => {
   const cancelTokenSource = useRef(null);
   const { t } = useTranslation();
 
-  const fetchData = async (search) => {
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false)
+    }, 500);
+  }, [t])
+
+  const fetchData = async (search, params) => {
     try {
       if (cancelTokenSource.current) {
         cancelTokenSource.current.cancel(
@@ -29,12 +35,15 @@ export const CarList = () => {
       const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api`, {
         params: {
           search,
+          limit: 30,
+          _page: 1,
+          ...params
         },
         cancelToken: cancelTokenSource.current.token,
       });
 
-      setCars(data.data);
-      setAllCars(data.data);
+      setCars(data?.data);
+      setAllCars(data?.data);
     } catch (e) {
       console.error(e);
     } finally {
@@ -57,7 +66,7 @@ export const CarList = () => {
       ),
       children: (
         <Search
-          onChange={(search) => {
+          onChange={async(search) => {
             const filterData = search
               ? allCars.filter(
                   (e) =>
@@ -76,6 +85,7 @@ export const CarList = () => {
                 )
               : allCars;
             setCars(filterData);
+            await fetchData(search)
           }}
         />
       ),
@@ -90,12 +100,16 @@ export const CarList = () => {
       children: (
         <Filters
           data={allCars}
-          onFilter={(filteredData) => {
-            setLoading(true);
-            setCars(filteredData);
-            setTimeout(() => {
-              setLoading(false);
-            }, 1000);
+          onFilter={async (filters) => {
+            console.log('filters',filters);
+            // if (type) {
+              await fetchData("", filters)
+            // }
+            // setLoading(true);
+            // setCars(filteredData);
+            // setTimeout(() => {
+            //   setLoading(false);
+            // }, 1000);
           }}
           onReset={fetchData}
         />
@@ -119,9 +133,9 @@ export const CarList = () => {
           {/* <img src="/images/loading.gif" /> */}
           <Spin size="large" />
         </div>
-      ) : (
+      ) : cars?.length ? (
         <RecommendProduct car={cars} />
-      )}
+      ) : <>{t("There is no data")}</>}
     </div>
   );
 };

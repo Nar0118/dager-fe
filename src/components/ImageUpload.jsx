@@ -9,15 +9,15 @@ const ImageUpload = ({ upload }) => {
   const [preview, setPreview] = useState(null);
   const [message, setMessage] = useState("");
 
-  const onFileChange = (e) => {
+  const onFileChange = async (e) => {
     setFile(e.target.files[0]);
     // setPreview(URL.createObjectURL(e.target.files[0]));
-  };
+  // };
 
-  const onSubmit = async (e) => {
+  // const onSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("image", file); // This should match the field name in the backend
+    formData.append("image", e.target.files[0]); // This should match the field name in the backend
 
     try {
       const { data } = await axios.post(
@@ -34,7 +34,7 @@ const ImageUpload = ({ upload }) => {
       await upload(data.filePath);
       setMessage("File uploaded successfully");
     } catch (err) {
-      console.error(err);
+      console.error(11111, err);
       if (err?.response?.status === 500) {
         setMessage("There was a problem with the server");
       } else {
@@ -49,7 +49,7 @@ const ImageUpload = ({ upload }) => {
     }}>
       <form>
         <div className="formGroup form-group">
-          <label htmlFor="imageUpload" className="inputContainer">
+          <label htmlFor="imageUpload" className="inputContainera">
             <img
               src="https://ik.imagekit.io/2zlgs27bjo/public/icons/uploadFile.svg"
               alt="uploadFile"
@@ -58,22 +58,22 @@ const ImageUpload = ({ upload }) => {
           </label>
           <input
             id="imageUpload"
-            className={`uploadFileInput uploadFileInput`}
+            // className={`uploadFileInput uploadFileInput`}
             disabled={!!preview}
             onChange={onFileChange}
             name="file"
             type="file"
           />
         </div>
-        <Button
-          onClick={onSubmit}
+        {/* <Button
+          // onClick={onSubmit}
           style={{
             float: "right",
             marginTop: "20px"
     }}
         >
           Upload
-        </Button>
+        </Button> */}
       </form>
       <div>{message}</div>
     </div>

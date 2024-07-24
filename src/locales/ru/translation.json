@@ -11,11 +11,11 @@
   "FRONT ROTOR": "ПЕРЕДНИЙ РОТОР",
   "FRONT BRAKE": "ПЕРЕДНИЙ ТОРМОЗ",
   "REAR ROTOR": "ЗАДНИЙ РОТОР",
-  "REAR BRAKE": "ЗАДНИЙ РОТОР",
+  "REAR BRAKE": "ЗАДНИЙ ТОРМОЗ",
   "Home": "Главная",
   "Catalogue": "Каталог",
   "Admin": "Админ",
   "Log out": "Выйти",
-  "Login": "Login"
-  
+  "Login": "Login",
+  "There is no data": "Нет данных"
 }
