@@ -34,7 +34,7 @@ export const CarList = () => {
       cancelTokenSource.current = axios.CancelToken.source();
       const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api`, {
         params: {
-          search: search || params?.name,
+          search,
           limit: 30,
           _page: 1,
           ...params
