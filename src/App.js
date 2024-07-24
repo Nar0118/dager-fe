@@ -7,7 +7,6 @@ import LoginPage from "./pages/Login";
 import NotFound from "./pages/404";
 import { Navbar } from "./components/Navbar";
 import CarDetails from "./pages/CarDetails";
-import axios from "axios";
 
 // const data = [
 //   {
