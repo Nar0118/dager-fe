@@ -10,6 +10,7 @@
     "@types/jwt-decode": "^3.1.0",
     "antd": "^5.17.3",
     "axios": "^1.7.2",
+    "google-map-react": "^2.2.1",
     "i18next": "^23.12.1",
     "i18next-browser-languagedetector": "^8.0.0",
     "i18next-http-backend": "^2.5.2",

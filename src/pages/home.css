@@ -599,7 +599,7 @@ footer span {
 	}
 
 	.main {
-		max-width: 400px;
+		width: fit-content;
 	}
 
 	.map {
@@ -613,6 +613,8 @@ footer span {
 
 	.p5 {
 		margin: 0 auto;
+		width: 300px;
+		justify-content: space-between;
 	}
 
 	.prev-indent-bot {
