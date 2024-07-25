@@ -16,7 +16,9 @@ const CarDetailPage = () => {
   useEffect(() => {
     const fetchCarDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/${carId}`);
+        const response = await axios.get(
+          `${process.env.REACT_APP_API_URL}/api/${carId}`
+        );
         setCar(response.data);
       } finally {
         setLoading(false);
@@ -65,7 +67,7 @@ const CarDetailPage = () => {
       >
         <div>
           <img
-            src={`http://localhost:5000${car[type].image}`}
+            src={`${process.env.REACT_APP_API_URL}${car[type].image}`}
             alt=""
             style={{
               maxWidth: "235px",

@@ -112,30 +112,30 @@ import CarDetails from "./pages/CarDetails";
 // };
 
 function App() {
-  useEffect(() => {
-    // sendAllData();
+  // useEffect(() => {
+  //   // sendAllData();
 
-    const handleClick = (event) => {
-      const navElements = document.querySelectorAll(".nav-elements");
-      if (!event?.target?.id || !event?.target?.id.includes("Rectangle")) {
-        navElements.forEach((element) => {
-          element.classList.remove("active");
-        });
-      }
-    };
+  //   const handleClick = (event) => {
+  //     const navElements = document.querySelectorAll(".nav-elements");
+  //     if (!event?.target?.id || !event?.target?.id.includes("Rectangle")) {
+  //       navElements.forEach((element) => {
+  //         element.classList.remove("active");
+  //       });
+  //     }
+  //   };
 
-    const rootElement = document.getElementById("root");
+  //   const rootElement = document.getElementById("root");
 
-    if (rootElement) {
-      rootElement.addEventListener("click", handleClick);
-    }
+  //   if (rootElement) {
+  //     rootElement.addEventListener("click", handleClick);
+  //   }
 
-    return () => {
-      if (rootElement) {
-        rootElement.removeEventListener("click", handleClick);
-      }
-    };
-  }, []);
+  //   return () => {
+  //     if (rootElement) {
+  //       rootElement.removeEventListener("click", handleClick);
+  //     }
+  //   };
+  // }, []);
 
   return (
     <Router>
