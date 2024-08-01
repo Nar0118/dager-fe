@@ -14,11 +14,12 @@ body {
   justify-content: space-between;
   align-items: center;
   height: 100%;
+  width: 100%;
 }
 
 .navbar {
   height: 60px;
-  background-color: #d7dced;
+  background-color: rgb(90, 177, 55);
   position: relative;
   display: flex;
   align-items: center;
@@ -35,7 +36,7 @@ body {
 }
 
 .nav-elements {
-  z-index: 4;
+  z-index: 20;
 }
 
 .nav-elements ul li:not(:last-child) {
@@ -167,7 +168,7 @@ body {
 }
 
 .collapseColumns8 {
-  grid-template-columns: 200px 200px 200px 200px 200px 200px 200px 200px;
+  grid-template-columns: auto auto auto auto auto auto;
 }
 
 .collapseColumns9 {
@@ -183,7 +184,7 @@ body {
 
 /* tabs */
 .tabActive {
-  background: #22acf2;
+  background: rgb(90, 177, 55);
   border-radius: 23px;
   padding: 7px 40px;
   color: #fff;
@@ -247,7 +248,6 @@ body {
   justify-content: center;
   align-items: center;
   column-gap: 20px;
-  /* text-align: center; */
 }
 
 .map {
@@ -280,7 +280,7 @@ body {
     position: absolute;
     right: 0;
     top: 60px;
-    background-color: #d7dced;
+    background-color: rgb(90, 177, 55);
     width: 0px;
     height: calc(100vh - 60px);
     transition: all 0.3s ease-in;
@@ -289,6 +289,7 @@ body {
 
   .nav-elements.active {
     width: 270px;
+    padding-left: 20px;
   }
 
   .nav-elements ul {

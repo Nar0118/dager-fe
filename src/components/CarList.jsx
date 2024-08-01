@@ -9,7 +9,7 @@ import RecommendProduct from "./RecommendProduct";
 import "./styles.css";
 
 export const CarList = () => {
-  const [cars, setCars] = useState([]);
+  const [cars, setCars] = useState(null);
   const [loading, setLoading] = useState(false);
   const [allCars, setAllCars] = useState([]);
   const [current, setCurrent] = useState(1);
@@ -19,7 +19,7 @@ export const CarList = () => {
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
-      setLoading(false)
+      Array.isArray(cars) && cars?.length && setLoading(false)
     }, 500);
   }, [t])
 
@@ -133,9 +133,9 @@ export const CarList = () => {
           {/* <img src="/images/loading.gif" /> */}
           <Spin size="large" />
         </div>
-      ) : cars?.length ? (
+      ) : (
         <RecommendProduct car={cars} />
-      ) : <>{t("There is no data")}</>}
+      ) }
     </div>
   );
 };

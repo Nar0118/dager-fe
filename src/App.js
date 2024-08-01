@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import AdminPage from "./pages/AdminPage";
 import Home from "./pages/Home";
@@ -7,6 +7,9 @@ import LoginPage from "./pages/Login";
 import NotFound from "./pages/404";
 import { Navbar } from "./components/Navbar";
 import CarDetails from "./pages/CarDetails";
+import About from "./pages/About";
+import SparkPlugs from "./pages/SparkPlugs";
+import WiperBlades from "./pages/WiperBlades";
 
 // const data = [
 //   {
@@ -142,6 +145,9 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/sparkPlugs" element={<SparkPlugs />} />
+        <Route path="/wiperBlades" element={<WiperBlades />} />
         <Route path="/catalogue" element={<CarPage />} />
         <Route path="/catalogue/:carId" element={<CarDetails />} />
         {/* <Route path="/catalogue/:id" component={<CarDeta  ils />} /> */}

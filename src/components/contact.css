@@ -1,0 +1,9 @@
+.contactForm {
+  width: 100%;
+  padding: 0 20px;
+}
+
+.contactForm input,
+.contactForm textarea {
+  max-width: 600px !important;
+}

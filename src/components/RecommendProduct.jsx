@@ -58,7 +58,7 @@ const RecommendProduct = ({ car, isFilter }) => {
                       {r?.body}
                     </p>
                   )}
-                  {r?.FRONTROTOR?.marka && r?.FRONTROTOR?.marka !== " " && (
+                  {/* {r?.FRONTROTOR?.marka && r?.FRONTROTOR?.marka !== " " && (
                     <p>
                       <p>{t("FRONT ROTOR")}</p>
                       <hr />
@@ -69,7 +69,7 @@ const RecommendProduct = ({ car, isFilter }) => {
                         {r.FRONTROTOR.marka}
                       </a>
                     </p>
-                  )}
+                  )} */}
                   {r?.FRONTBRAKE?.marka && r?.FRONTBRAKE?.marka !== " " && (
                     <p>
                       <p>{t("FRONT BRAKE")}</p>
@@ -82,7 +82,7 @@ const RecommendProduct = ({ car, isFilter }) => {
                       </a>
                     </p>
                   )}
-                  {r?.REARROTOR?.marka && r?.REARROTOR?.marka !== " " && (
+                  {/* {r?.REARROTOR?.marka && r?.REARROTOR?.marka !== " " && (
                     <p>
                       <p>{t("REAR ROTOR")}</p>
                       <hr />
@@ -90,7 +90,7 @@ const RecommendProduct = ({ car, isFilter }) => {
                         {r.REARROTOR.marka}
                       </a>
                     </p>
-                  )}
+                  )} */}
                   {r?.REARBRAKE?.marka && r?.REARBRAKE?.marka !== " " && (
                     <p>
                       <p>{t("REAR BRAKE")}</p>

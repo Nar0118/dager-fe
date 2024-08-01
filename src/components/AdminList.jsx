@@ -47,7 +47,7 @@ const PaginatedTable = () => {
         },
         cancelToken: cancelTokenSource.current.token,
       });
-      console.log("data", data);
+
       setData(data.data);
       setPagination({
         ...params.pagination,
@@ -485,43 +485,41 @@ const PaginatedTable = () => {
       _id: "PARKINGSHOE Width1",
       render: (e) => e?.Width1,
     },
-    [
-      {
-        title: "Edit",
-        dataIndex: "edit",
-        key: "edit",
-        _id: "edit",
-        render: (_, r) => (
-          <Button
-            type="primary"
-            onClick={() => {
-              setSelectedProduct(r);
-              setIsModalOpen(true);
-              setDeleteProduct(null);
-            }}
-          >
-            Edit
-          </Button>
-        ),
-      },
-      {
-        title: "Delete",
-        dataIndex: "delete",
-        key: "delete",
-        _id: "delete",
-        render: (_, t) => (
-          <Button
-            danger
-            onClick={() => {
-              setIsModalOpen(true);
-              setDeleteProduct(t._id);
-            }}
-          >
-            Delete
-          </Button>
-        ),
-      },
-    ],
+    {
+      title: "Edit",
+      dataIndex: "edit",
+      key: "edit",
+      _id: "edit",
+      render: (_, r) => (
+        <Button
+          type="primary"
+          onClick={() => {
+            setSelectedProduct(r);
+            setIsModalOpen(true);
+            setDeleteProduct(null);
+          }}
+        >
+          Edit
+        </Button>
+      ),
+    },
+    {
+      title: "Delete",
+      dataIndex: "delete",
+      key: "delete",
+      _id: "delete",
+      render: (_, t) => (
+        <Button
+          danger
+          onClick={() => {
+            setIsModalOpen(true);
+            setDeleteProduct(t._id);
+          }}
+        >
+          Delete
+        </Button>
+      ),
+    },
   ];
 
   return (

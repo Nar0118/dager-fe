@@ -4,7 +4,8 @@ import HttpApi from "i18next-http-backend";
 import LanguageDetector from "i18next-browser-languagedetector";
 
 import translationRU from "./locales/ru/translation.json";
-import translationDE from './locales/de/translation.json';
+import translationDE from "./locales/de/translation.json";
+import translationEN from "./locales/en/translation.json";
 
 const resources = {
   de: {
@@ -12,6 +13,9 @@ const resources = {
   },
   ru: {
     translation: translationRU,
+  },
+  en: {
+    translation: translationEN,
   },
 };
 
@@ -21,7 +25,7 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    fallbackLng: "ru",
+    fallbackLng: "en",
     debug: true,
     interpolation: {
       escapeValue: false,
