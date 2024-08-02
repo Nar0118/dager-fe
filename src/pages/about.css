@@ -27,3 +27,9 @@
   margin: 0;
   text-align: center;
 }
+
+@media (max-width: 768px) {
+  .aboutContainer {
+    background-size: cover;
+  }
+}

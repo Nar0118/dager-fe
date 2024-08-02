@@ -264,13 +264,13 @@ body {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 840px) {
   .nav-elements ul li:not(:last-child) {
     margin-right: 30px;
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 690px) {
   .menu-icon {
     display: block;
     cursor: pointer;
