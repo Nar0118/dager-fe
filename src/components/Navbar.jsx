@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { Select } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { LogoutOutlined } from "@ant-design/icons";
 import { decodeToken } from "../utils/functions";
+import Products from "./Products";
 
 import "./styles.css";
-import { Select } from "antd";
-import Products from "./Products";
 
 export const Navbar = () => {
   const [showNavbar, setShowNavbar] = useState(false);
@@ -31,9 +31,7 @@ export const Navbar = () => {
     navigate("/login");
   };
 
-  const handleShowNavbar = () => {
-    setShowNavbar(!showNavbar);
-  };
+  const handleShowNavbar = () => setShowNavbar(!showNavbar);
 
   const options = [
     {
@@ -96,10 +94,7 @@ export const Navbar = () => {
               </Link>
             </li>
             <li>
-              {/* <Link to="/about" onClick={handleShowNavbar}>
-                {t("About")}
-              </Link> */}
-              <Products />
+              <Products handleShowNavbar={handleShowNavbar} />
             </li>
             <li>
               <Link to="/catalogue" onClick={handleShowNavbar}>
@@ -129,6 +124,7 @@ export const Navbar = () => {
             <li>
               <Select
                 placeholder={
+                  // eslint-disable-next-line jsx-a11y/alt-text
                   <img
                     style={{
                       width: "25px",

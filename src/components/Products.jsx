@@ -1,23 +1,36 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { DownOutlined } from "@ant-design/icons";
 import { Dropdown, Space } from "antd";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-const Products = () => {
+const Products = ({ handleShowNavbar }) => {
   const { t } = useTranslation();
   const items = [
     {
       key: "1",
-      label: <Link to="/catalogue">{t("Catalogue")}</Link>,
+      label: (
+        <Link onClick={handleShowNavbar} to="/catalogue">
+          {t("Catalogue")}
+        </Link>
+      ),
     },
     {
       key: "2",
-      label: <Link to="/sparkPlugs">{t("Spark plugs")}</Link>,
+      label: (
+        <Link onClick={handleShowNavbar} to="/sparkPlugs">
+          {t("Spark plugs")}
+        </Link>
+      ),
     },
     {
       key: "3",
-      label: <Link to="/wiperBlades">{t("Wiper blades")}</Link>,
+      label: (
+        <Link onClick={handleShowNavbar} to="/wiperBlades">
+          {t("Wiper blades")}
+        </Link>
+      ),
     },
   ];
 
