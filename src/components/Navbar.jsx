@@ -188,7 +188,7 @@ const Hamburger = () => (
 
 const Logo = () => (
   <img
-    src="/logo.png"
+    src="/images/logo.png"
     alt=""
     style={{
       width: "150px",
