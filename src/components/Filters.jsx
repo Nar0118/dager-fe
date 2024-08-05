@@ -184,7 +184,7 @@ const Filters = ({ data, onFilter, onReset }) => {
         />
       </div>
       <div className="filterItem">
-        <label htmlFor="body">Body</label>
+        <label htmlFor="body">{t("Body")}</label>
         <Select
           id="body"
           value={filters.body}

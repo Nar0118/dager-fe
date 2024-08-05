@@ -39,5 +39,6 @@
   "The input is not a valid email!": "Введенный адрес электронной почты недействителен!",
   "Success": "Успех",
   "Something went wrong!": "Что-то пошло не так!",
-  "Error": "Ошибка"
+  "Error": "Ошибка",
+  "Body": "Кузов"
 }

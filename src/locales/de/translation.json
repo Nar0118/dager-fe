@@ -39,5 +39,6 @@
   "The input is not a valid email!": "Bei der Eingabe handelt es sich nicht um eine gültige E-Mail!",
   "Success": "Erfolg",
   "Something went wrong!": "Etwas ist schief gelaufen!",
-  "Error": "Fehler"
+  "Error": "Fehler",
+  "Body": "Karosserie"
 }
