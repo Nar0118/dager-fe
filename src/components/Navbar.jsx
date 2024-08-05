@@ -38,6 +38,7 @@ export const Navbar = () => {
   const options = [
     {
       label: (
+        // eslint-disable-next-line jsx-a11y/alt-text
         <img
           style={{
             width: "25px",
@@ -49,6 +50,7 @@ export const Navbar = () => {
     },
     {
       label: (
+        // eslint-disable-next-line jsx-a11y/alt-text
         <img
           style={{
             width: "25px",
@@ -60,6 +62,7 @@ export const Navbar = () => {
     },
     {
       label: (
+        // eslint-disable-next-line jsx-a11y/alt-text
         <img
           style={{
             width: "25px",
@@ -96,7 +99,7 @@ export const Navbar = () => {
               {/* <Link to="/about" onClick={handleShowNavbar}>
                 {t("About")}
               </Link> */}
-            <Products />
+              <Products />
             </li>
             <li>
               <Link to="/catalogue" onClick={handleShowNavbar}>
