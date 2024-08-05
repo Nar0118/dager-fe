@@ -83,7 +83,7 @@ class Slider extends React.Component {
             >
               <div className="slider__slide-content">
                 <h3 className="slider__slide-subheading">
-                  {slide.country || slide.city}
+                  {/* {slide.country || slide.city} */}
                 </h3>
                 <h2 className="slider__slide-heading">
                   {slide.city.split("").map((l, i) => (
