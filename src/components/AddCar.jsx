@@ -26,113 +26,113 @@ export const FormDisabledDemo = ({ selectedProduct, onOk }) => {
     { name: "model", rules: [], label: t("Model") },
     {
       name: "year",
-      label: "Year",
+      label: t("Year"),
     },
-    { name: "engineVal", label: t("Engine Val") },
+    { name: "engineVal", label: t("Engine Vol") },
     { name: "engineNo", label: t("Engine No") },
   ];
 
   const FRONTROTORformItems = [
-    { name: "FRONTROTOR_type", label: "Type" },
+    { name: "FRONTROTOR_type", label: t("Type") },
     {
       name: "FRONTROTOR_discThicknessMax",
-      label: "Disc Thickness Max.",
+      label: t("Disc Thickness Max"),
     },
-    { name: "FRONTROTOR_numOfHoles", label: "Num Of Holes" },
-    { name: "FRONTROTOR_height", label: "Height" },
+    { name: "FRONTROTOR_numOfHoles", label: t("Num Of Holes") },
+    { name: "FRONTROTOR_height", label: t("Height") },
     {
       name: "FRONTROTOR_centeringDiameter",
-      label: "Centering Diameter",
+      label: t("Centering Diameter"),
     },
     {
       name: "FRONTROTOR_pitchCircle",
-      label: "Pitch Circle",
+      label: t("Pitch Circle"),
     },
     {
       name: "FRONTROTOR_outter",
-      label: "Outter",
+      label: t("Outter"),
     },
     {
       name: "FRONTROTOR_drum",
-      label: "Drum",
+      label: t("Drum"),
     },
-    { name: "FRONTROTOR_marka", label: "Marka" },
+    { name: "FRONTROTOR_marka", label: t("Code") },
   ];
 
   const FRONTBRAKEformItems = [
-    { name: "FRONTBRAKE_Length-1", label: "Length" },
+    { name: "FRONTBRAKE_Length-1", label: t("Length") },
     {
       name: "FRONTBRAKE_Width-1",
-      label: "Width",
+      label: t("Width"),
     },
-    { name: "FRONTBRAKE_Thickness-1", label: "Thickness" },
+    { name: "FRONTBRAKE_Thickness-1", label: t("Thickness") },
     {
       name: "FRONTBRAKE_discThicknessMax",
-      label: "Disc Thickness Max",
+      label: t("Disc Thickness Max"),
     },
-    { name: "FRONTBRAKE_numOfHoles", label: "Num Of Holes" },
+    { name: "FRONTBRAKE_numOfHoles", label: t("Num Of Holes") },
     {
       name: "FRONTBRAKE_Pcs In Set",
-      label: "Pcs In Set",
+      label: t("Pcs In Set"),
     },
     {
       name: "FRONTBRAKE_Brake System",
-      label: "Brake System",
+      label: t("Brake System"),
     },
-    { name: "FRONTBRAKE_marka", label: "Marka" },
+    { name: "FRONTBRAKE_marka", label: t("Code") },
   ];
 
   const REARROTORformItems = [
-    { name: "REARROTOR_type", label: "Type" },
+    { name: "REARROTOR_type", label: t("Type") },
     {
       name: "REARROTOR_discThicknessMax",
-      label: "Disc Thickness Max",
+      label: t("Disc Thickness Max"),
     },
-    { name: "REARROTOR_numOfHoles", label: "Num Of Holes" },
-    { name: "REARROTOR_height", label: "Height" },
-    { name: "REARROTOR_centeringDiameter", label: "Centering Diameter" },
-    { name: "REARROTOR_pitchCircle", label: "Pitch Circle" },
-    { name: "REARROTOR_outter", label: "Outter" },
-    { name: "REARROTOR_drum", label: "Drum" },
-    { name: "REARROTOR_marka", label: "Marka" },
+    { name: "REARROTOR_numOfHoles", label: t("Num Of Holes") },
+    { name: "REARROTOR_height", label: t("Height") },
+    { name: "REARROTOR_centeringDiameter", label: t("Centering Diameter") },
+    { name: "REARROTOR_pitchCircle", label: t("Pitch Circle") },
+    { name: "REARROTOR_outter", label: t("Outter") },
+    { name: "REARROTOR_drum", label: t("Drum") },
+    { name: "REARROTOR_marka", label: t("Code") },
   ];
 
   const REARBRAKEformItems = [
-    { name: "REARBRAKE_Length-1", label: "Length" },
+    { name: "REARBRAKE_Length-1", label: t("Length") },
     {
       name: "REARBRAKE_Width-1",
-      label: "Width",
+      label: t("Width"),
     },
-    { name: "REARBRAKE_Thickness-1", label: "Thickness" },
+    { name: "REARBRAKE_Thickness-1", label: t("Thickness") },
     {
       name: "REARBRAKE_discThicknessMax",
-      label: "Disc Thickness Max",
+      label: t("Disc Thickness Max"),
     },
-    { name: "REARBRAKE_numOfHoles", label: "Num Of Holes" },
+    { name: "REARBRAKE_numOfHoles", label: t("Num Of Holes") },
     {
       name: "REARBRAKE_Pcs In Set",
-      label: "Pcs In Set",
+      label: t("Pcs In Set"),
     },
     {
       name: "REARBRAKE_Brake System",
-      label: "Brake System",
+      label: t("Brake System"),
     },
-    { name: "REARBRAKE_marka", label: "Marka" },
+    { name: "REARBRAKE_marka", label: t("Code") },
   ];
 
   const PARKINGSHOEformItems = [
-    { name: "PARKINGSHOE_Radius", label: "Radius" },
+    { name: "PARKINGSHOE_Radius", label: t("Radius") },
     {
       name: "PARKINGSHOE_Width-1",
-      label: "Width",
+      label: t("Width"),
     },
     {
       name: "PARKINGSHOE_Pcs In Set",
-      label: "Pcs In Set",
+      label: t("Pcs In Set"),
     },
-    { name: "PARKINGSHOE_Thickness-1", label: "Thickness" },
+    { name: "PARKINGSHOE_Thickness-1", label: t("Thickness") },
 
-    { name: "PARKINGSHOE_marka", label: "Marka" },
+    { name: "PARKINGSHOE_marka", label: t("Code") },
   ];
 
   useEffect(() => {
@@ -225,7 +225,7 @@ export const FormDisabledDemo = ({ selectedProduct, onOk }) => {
           color: "#000",
         }}
       >
-        {selectedProduct ? "Edit" : "Add"} product
+        {selectedProduct ? "Edit" : t("Add")} {t("Products")}
       </h2>
       {formItems.map((e) => (
         <Form.Item
@@ -239,7 +239,7 @@ export const FormDisabledDemo = ({ selectedProduct, onOk }) => {
           <Input placeholder={e.label} />
         </Form.Item>
       ))}
-      <div className="part_item_title">FRONT ROTOR</div>
+      <div className="part_item_title">{t("FRONT ROTOR")}</div>
       {FRONTROTORformItems.map((e) => (
         <Form.Item
           label={e.label}
@@ -252,7 +252,6 @@ export const FormDisabledDemo = ({ selectedProduct, onOk }) => {
           <Input placeholder={e.label} />
         </Form.Item>
       ))}
-      111
       <ImageUpload
         upload={async (image) => {
           setFRONTROTORImageReview(image);
@@ -272,7 +271,7 @@ export const FormDisabledDemo = ({ selectedProduct, onOk }) => {
           )}
         </div>
       }
-      <div className="part_item_title">FRONT BRAKE</div>
+      <div className="part_item_title">{t("FRONT BRAKE")}</div>
       {FRONTBRAKEformItems.map((e) => (
         <Form.Item
           label={e.label}
@@ -304,7 +303,7 @@ export const FormDisabledDemo = ({ selectedProduct, onOk }) => {
           )}
         </div>
       }
-      <div className="part_item_title">REAR ROTOR</div>
+      <div className="part_item_title">{t("REAR ROTOR")}</div>
       {REARROTORformItems.map((e) => (
         <Form.Item
           label={e.label}
@@ -336,7 +335,7 @@ export const FormDisabledDemo = ({ selectedProduct, onOk }) => {
           )}
         </div>
       }
-      <div className="part_item_title">REARB RAKE</div>
+      <div className="part_item_title">{t("REAR BRAKE")}</div>
       {REARBRAKEformItems.map((e) => (
         <Form.Item
           label={e.label}
@@ -368,7 +367,7 @@ export const FormDisabledDemo = ({ selectedProduct, onOk }) => {
           )}
         </div>
       }
-      <div className="part_item_title">PARKING SHOE</div>
+      <div className="part_item_title">{t("PARKING SHOE")}</div>
       {PARKINGSHOEformItems.map((e) => (
         <Form.Item
           label={e.label}
@@ -425,7 +424,7 @@ export const FormDisabledDemo = ({ selectedProduct, onOk }) => {
         </div>
       </Form.Item> */}
       <Form.Item>
-        <Button htmlType="submit">{selectedProduct ? "Edit" : "Add"}</Button>
+        <Button htmlType="submit">{selectedProduct ? t("Edit") : t("Add")}</Button>
       </Form.Item>
     </Form>
   );

@@ -119,7 +119,6 @@ export const CarList = () => {
 
   return (
     <div className="tabsContainer">
-      <h2>Car Catalogue</h2>
       <Tabs
         defaultActiveKey="1"
         items={items}

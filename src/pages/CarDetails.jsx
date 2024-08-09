@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import axios from "axios";
 import RecommendProduct from "../components/RecommendProduct";
 
@@ -12,6 +13,7 @@ const CarDetailPage = () => {
   const [loading, setLoading] = useState(true);
   const { search } = useLocation();
   const type = search?.replace("?", "");
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchCarDetails = async () => {
@@ -51,8 +53,8 @@ const CarDetailPage = () => {
     }
   }, [car]);
 
-  if (loading) return <div>Loading...</div>;
-  if (!car) return <div>No car found</div>;
+  if (loading) return <div>{t("Loading")}...</div>;
+  if (!car) return <div>{t("No car found")}</div>;
 
   return (
     <div className="recommendedItems">
@@ -75,59 +77,125 @@ const CarDetailPage = () => {
           />
         </div>
         <div>
-          <h4>Specification</h4>
+          <br />
+          <h4>{t("Specification")}</h4>
+          <br />
           <div className="carDetails">
             <div>
-              <p>Model: {car[type].model}</p>
+              <p>
+                {t("Model")}: {car[type].model}
+              </p>
 
-              {car[type]?.year && <p>Year: {car[type].year}</p>}
-              {car[type]?.type && <p>Type: {car[type].type}</p>}
+              {car[type]?.year && (
+                <p>
+                  {t("Year")}: {car[type].year}
+                </p>
+              )}
+              {car[type]?.type && (
+                <p>
+                  {t("Type")}: {car[type].type}
+                </p>
+              )}
               {car[type]?.discThicknessMax && (
-                <p>Disc Thickness Max: {car[type].discThicknessMax}</p>
+                <p>
+                  {t("Disc Thickness Max")}: {car[type].discThicknessMax}
+                </p>
               )}
               {car[type]?.numOfHoles && (
-                <p>Num Of Holes: {car[type].numOfHoles}</p>
+                <p>
+                  {t("Num Of Holes")}: {car[type].numOfHoles}
+                </p>
               )}
-              {car[type]?.height && <p>Height: {car[type].height}</p>}
+              {car[type]?.height && (
+                <p>
+                  {t("Height")}: {car[type].height}
+                </p>
+              )}
               {car[type]["Thickness-1"] && (
-                <p>Thickness: {car[type]["Thickness-1"]}</p>
+                <p>
+                  {t("Thickness")}: {car[type]["Thickness-1"]}
+                </p>
               )}
               {car[type].centeringDiameter && (
-                <p>Centering Diameter: {car[type].centeringDiameter}</p>
+                <p>
+                  {t("Centering Diameter")}: {car[type].centeringDiameter}
+                </p>
               )}
             </div>
             <div>
               {car[type]["Pcs In Set"] && (
-                <p>Pcs In Set: {car[type]["Pcs In Set"]}</p>
+                <p>
+                  {t("Pcs In Set")}: {car[type]["Pcs In Set"]}
+                </p>
               )}
               {car[type]["Brake System"] && (
-                <p>Brake System: {car[type]["Brake System"]}</p>
+                <p>
+                  {t("Brake System")}: {car[type]["Brake System"]}
+                </p>
               )}
-              {car[type]["Length-1"] && <p>Length: {car[type]["Length-1"]}</p>}
-              {car[type]["Width-1"] && <p>Width: {car[type]["Width-1"]}</p>}
+              {car[type]["Length-1"] && (
+                <p>
+                  {t("Length")}: {car[type]["Length-1"]}
+                </p>
+              )}
+              {car[type]["Width-1"] && (
+                <p>
+                  {t("Width")}: {car[type]["Width-1"]}
+                </p>
+              )}
               {car[type]?.pitchCircle && (
-                <p>Pitch Circle: {car[type].pitchCircle}</p>
+                <p>
+                  {t("Pitch Circle")}: {car[type].pitchCircle}
+                </p>
               )}
-              {car[type]?.outter && <p>Outter: {car[type].outter}</p>}
-              {car[type]?.drum && <p>Drum: {car[type].drum}</p>}
+              {car[type]?.outter && (
+                <p>
+                  {t("Outter")}: {car[type].outter}
+                </p>
+              )}
+              {car[type]?.drum && (
+                <p>
+                  {t("Drum")}: {car[type].drum}
+                </p>
+              )}
               {car[type]?.bodyChassis && (
-                <p>Body Chassis: {car[type].bodyChassis}</p>
+                <p>
+                  {t("Body")}: {car[type].bodyChassis}
+                </p>
               )}
-              {car[type]?.engineVal && <p>Engine Val: {car[type].engineVal}</p>}
-              {car[type]?.engineNo && <p>Engine No: {car[type].engineNo}</p>}
-              {car[type]?.body && <p>Body: {car[type].body}</p>}
+              {car[type]?.engineVal && (
+                <p>
+                  {t("Engine Vol")}: {car[type].engineVal}
+                </p>
+              )}
+              {car[type]?.engineNo && (
+                <p>
+                  {t("Engine No")}: {car[type].engineNo}
+                </p>
+              )}
+              {car[type]?.body && (
+                <p>
+                  {t("Body")}: {car[type].body}
+                </p>
+              )}
             </div>
           </div>
+          <br />
           <hr />
+          <br />
           <div>
-            <h4>Cross Reference</h4>
+            {/* <h4>{t("Cross Reference")}</h4> */}
             <div
               style={{
                 display: "flex",
                 columnGap: "40px",
               }}
             >
-              {car[type]?.name && <span>NAME: {car[type].name}</span>}
+              {car[type]?.name && (
+                <span>
+                  {t("Name")}: {car[type].name}
+                </span>
+              )}
             </div>
           </div>
         </div>
