@@ -83,11 +83,9 @@ const Contact = () => {
             },
           ]}
         >
-          <TextArea rows={5} size="" />
+          <TextArea rows={5} size="" style={{ resize: "none" }} />
         </Form.Item>
-        <Form.Item
-          style={{ maxWidth: "560px", margin: "0 auto" }}
-        >
+        <Form.Item style={{ maxWidth: "560px", margin: "0 auto" }}>
           <Button type="primary" htmlType="submit">
             {t("Send")}
           </Button>

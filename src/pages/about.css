@@ -28,6 +28,17 @@
   text-align: center;
 }
 
+.imagesGallery {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@media (min-width: 768px) {
+  .imagesGallery > div {
+    max-width: 33.3333333%;
+  }
+}
+
 @media (max-width: 768px) {
   .aboutContainer {
     background-size: cover;

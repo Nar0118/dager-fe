@@ -2,32 +2,10 @@ import React from "react";
 
 import "./slider.css";
 
-const slides = [
-  {
-    city: "Pads",
-    // country: "Brake",
-    img: "/images/pads-bg.png",
-  },
-  {
-    city: "Wiper blades",
-    img: "/images/conventional-wiper.jpg",
-  },
-  {
-    city: "Spark plugs",
-    // country: "Czech Republic",
-    img: "/images/Spark-Plug.jpg",
-  },
-  // {
-  //   city: "Amsterdam",
-  //   country: "Netherlands",
-  //   img: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/amsterdam.jpg",
-  // },
-  // {
-  //   city: "Moscow",
-  //   country: "Russia",
-  //   img: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/142996/moscow.jpg",
-  // },
-];
+const slides = Array.from({ length: 35 }, (_, i) => ({
+  city: "",
+  img: `/images/products/image000${i + 1}.JPG`,
+}));
 
 class Slider extends React.Component {
   constructor(props) {

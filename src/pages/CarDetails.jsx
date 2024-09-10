@@ -3,6 +3,7 @@ import { useParams, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
 import RecommendProduct from "../components/RecommendProduct";
+import { Image } from "antd";
 
 import "./styles.css";
 
@@ -68,7 +69,7 @@ const CarDetailPage = () => {
         }}
       >
         <div>
-          <img
+          <Image
             src={`${process.env.REACT_APP_API_URL}${car[type].image}`}
             alt=""
             style={{

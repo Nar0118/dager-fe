@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Button, Table } from "antd";
 import axios from "axios";
@@ -38,7 +37,6 @@ const PaginatedTable = () => {
       }
 
       cancelTokenSource.current = axios.CancelToken.source();
-console.log('params',params);
       const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api`, {
         params: {
           page: params?.pagination?.current || params?.current,
@@ -70,7 +68,6 @@ console.log('params',params);
   }, []);
 
   const handleTableChange = async (pagination) => {
-    console.log(1111, pagination);
     // setPagination(pagination);
     setLoading(true);
     await fetchData(pagination)
@@ -82,7 +79,6 @@ console.log('params',params);
       dataIndex: "name",
       key: "name",
       _id: "name",
-      render: (e, r) => <Link to={`/catalogue/${r._id}`}>{e}</Link>,
     },
     {
       title: t("Model"),
@@ -124,7 +120,6 @@ console.log('params',params);
       _id: "discThicknessMax",
       render: (e) => e?.discThicknessMax,
     },
-    // Add more columns here as needed...
     {
       title: "Edit",
       dataIndex: "edit",
