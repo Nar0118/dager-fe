@@ -33,6 +33,8 @@ export const Navbar = () => {
 
   const handleShowNavbar = () => setShowNavbar(!showNavbar);
 
+  const flags = ["flag_de", "flag_ru", "flag_en-US"];
+
   const options = [
     {
       label: (
@@ -129,7 +131,7 @@ export const Navbar = () => {
                     style={{
                       width: "25px",
                     }}
-                    src={`/images/flags/flag_${i18n?.language}.svg`}
+                    src={`/images/flags/flag_${!!flags[i18n?.language] ? i18n?.language : "en-US"}.svg`}
                   />
                 }
                 onChange={changeLanguage}
